@@ -58,14 +58,18 @@ export default class Router
         }
     }
 
-    static async importComponent(div, file, params = [], route)
+    static importComponent(div, file, params = [], route)
     {
         let routes = window.Routes;
+        console.log("Routes App: ", routes);
+
         routes.forEach(function(item, index){
             
-            console.log("Routes: ", item.route, item.file)
+            console.log("Routes !!!: ", item.route, item.file, location.pathname)            
             
-            if(item.route == route){
+            // if(item.route == route){
+            if(Router.testSlug(item.route, location.pathname))
+            {
                 file = item.file;
 
                 import(file).then(module => {
@@ -75,12 +79,12 @@ export default class Router
                 .catch(err => { 
                     // console.log(err.message);
                 }); // Promise import
-            }
+            }            
             
         })        
     }
 
-    async importMain(div,file, params)
+    importMain(div,file, params)
     {
         import(file).then(module => {
             let obj = module.LoadComponent(div, params);
@@ -91,9 +95,29 @@ export default class Router
         });
     }
 
-    findRoute(route)
-    {
-        // this.Routes
+    static testSlug(route, uri){        
+        if(uri === route){
+            console.log("URL SLUG ", uri);
+            return true;
+        }else{
+            let re = /{[a-z]+}/g;
+            let arr = route.match(re);
+            if(arr != null){
+                for(let i of arr){
+                    console.log("id ", i)
+                    route = route.replace(i, "[0-9a-zA-Z_.-]+")
+                }
+            }
+
+            let reg = "^" + route + "/?$"
+            reg = new RegExp(reg,"g");
+            if(reg.test(uri)){
+                return true;
+            }else{
+                return false;
+            }     
+        }       
+        return false;
     }
 
     static externalLinks(){
