@@ -19,10 +19,6 @@ window.onload = function(){
     console.log("OnLoad Event");    
 };
 
-window.hujnia = function(){    
-    console.log("Hujnia Event");    
-};
-
 function shouldUseDefault(e) {
     return ((e = (e || window.event)) && (e.type == 'click' || e.type == 'mousedown' || e.type == 'mouseup') && (e.which > 1 || e.button > 1 || e.ctrlKey || e.shiftKey || browser.mac && e.metaKey)) || false;
 } 
