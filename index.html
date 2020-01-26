@@ -15,8 +15,11 @@
 
     <style type="text/css">
     *{font-family: Arial}
-    a{float: left; padding: 9px 15px; margin: 5px; background: #09f; color: #fff; text-decoration: none; border: 1px solid #09f; transition: all .6s; border-radius: 4px; text-transform: lowercase; font-weight: 900; outline: none;}
-    a:hover{background: #fff; color: #09f; box-shadow: 0px 0px 6px rgba(0, 153, 255,.6) inset}
+    a{padding: 9px 15px; margin: 5px; background: #42b983; color: #fff; text-decoration: none; border: 1px solid #42b983; transition: all .6s; border-radius: 4px; text-transform: lowercase; font-weight: 900; outline: none;}
+    a:hover{background: #fff; color: #42b983; box-shadow: 0px 0px 6px rgba(66, 185, 131,.8) inset}
+    h2,h1{font-size: 35px; color: #273849;}
+    #app{margin: 0px auto; width: 90%; text-align: center;}
+    #links{margin: 0px auto; width: 90%; text-align: center; display: flex; justify-content: center; align-items: center;}
     </style>
 
   </head>
@@ -24,11 +27,13 @@
     <div id="app">
       <h2> Click on page link </h2>
     </div>
-    <a href="/">Home</a>
-    <a href="/page1">page 1</a>
-    <a href="/page2">page 2</a>
-    <a href="/page/123">page/{id}</a>
-    <a href="/post/123/image/Name123">post/{id}/image/{name}</a>
-    <a href="http://external-page.xx">External link</a>
+    <div id="links">
+      <a href="/">Home</a>
+      <a href="/page1">page 1</a>
+      <a href="/page2">page 2</a>
+      <a href="/page/123">page/{id}</a>
+      <a href="/post/123/image/Name123">post/{id}/image/{name}</a>
+      <a href="http://external-page.xx">External link</a>
+    </div>
   </body>
 </html>
