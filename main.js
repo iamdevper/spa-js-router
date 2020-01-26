@@ -9,6 +9,9 @@ r.addRoute("/", "./module.js");
 r.addRoute("/page1", "./module-page1.js");
 r.addRoute("/page2", "./module-page2.js");
 
+// Links from external pages to this page
+Router.externalLinks()
+
 // import('./module.js')
 // .then(module => {
 //     let obj = module.LoadComponent("#app", [1,2,3]);

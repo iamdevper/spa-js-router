@@ -4,6 +4,8 @@ export default class Router
 
     constructor(main = "./module.js", div = "#app") 
     {
+        window.App = div
+        window.AppMain = main
         this.app = div
         this.addOnLoad();
         this.addOnState();
@@ -92,5 +94,9 @@ export default class Router
     findRoute(route)
     {
         // this.Routes
+    }
+
+    static externalLinks(){
+        Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
     }
 }
