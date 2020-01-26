@@ -5,8 +5,8 @@ How to import, export components in pure javascript (class, function, template)
  - Create router with routes (or components)
  ```js
  new Router({
-	["/", "./page-index.js"],
-	["/about", "./page-about.js"]
+	["/", "./page-index.js", "#app"],
+	["/about", "./page-about.js", "#right"]
 });
 ```
 
