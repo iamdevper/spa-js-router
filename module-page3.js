@@ -7,7 +7,7 @@ class Page extends Component
 		console.log("Component params ", data);
 
 		let m = document.querySelector(div)
-		let html = '<h1 id="boo-click"> Click now on page 3 ' + location.pathname + '</a>'
+		let html = '<h1 id="boo-click"> Click now here page 3 ' + location.pathname + '</a>'
 		m.innerHTML = html
 
 		// Add event to html
