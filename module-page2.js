@@ -11,7 +11,7 @@ class Page extends Component
 		let txt = 'Hello from component 2!'
 		// m.textContent = txt
 
-		let html = '<h1 id="boo-click"> Click now here page 2</a>'
+		let html = '<h1 id="boo-click"> Welcome on page 2! Click here! </h1> <p>' + location.pathname + '</p>'
 		m.innerHTML = html
 
 		// Add event to html
