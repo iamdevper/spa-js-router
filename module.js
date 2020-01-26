@@ -11,7 +11,7 @@ class Page extends Component
 		let txt = 'Hello from component!'
 		// m.textContent = txt
 
-		let html = '<h1 id="boo-click"> Click now!</a>'
+		let html = '<h1 id="boo-click"> Click now! Open console: CTRL + SHIFT + K</a>'
 		m.innerHTML = html
 
 		// Add event to html
