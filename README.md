@@ -10,13 +10,13 @@ How to import, export components in pure javascript (class, function, template)
 });
 ```
 
- - OnPopStateChange, OnHashCHange load components from router
+ - OnPopStateChange, OnHashChange load components from router
 ```js
 window.onpopstate = function(event) {
     console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
 }
 
 window.onhashchange = function(event) {
-    console.log("OnHashCHange Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
+    console.log("OnHashChange Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
 }
 ```
