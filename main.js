@@ -1,33 +1,40 @@
 // TODO with history.js
-// 1 - Create router with routes
-// 2 - OnPopStateChange, OnHashCHange load components from router
+// 3 - Add {slugs} param to routes
+// 4 - Regex routes
 
-import('./module.js')
-.then(module => {
-	let obj = module.LoadComponent("#app", [1,2,3]);
-	console.log(obj);
-})
-.catch(err => {	
-	console.log(err.message);
-}); // Promise import
+import Router from './router.js'
+
+let r = new Router("./module.js");
+r.addRoute("/", "./module.js");
+r.addRoute("/page1", "./module-page1.js");
+r.addRoute("/page2", "./module-page2.js");
+
+// import('./module.js')
+// .then(module => {
+//     let obj = module.LoadComponent("#app", [1,2,3]);
+//     console.log(obj);
+// })
+// .catch(err => { 
+//     console.log(err.message);
+// }); // Promise import
 
 
 // Or import class
-class Import 
-{    
-    static async Component(file, div, params)
-    {
-        // let module = await import(file);
-        let res = '{}';
-        await import(file).then((module) => {
-            res = module.LoadComponent(div, params); // Do work in component
-        }).catch(err => {            
-            res = '{"err" : '+ err +'}';
-            console.log(err);
-        });
-        return res;
-    }    
-}
+// class Import 
+// {    
+//     static async Component(file, div, params)
+//     {
+//         // let module = await import(file);
+//         let res = '{}';
+//         await import(file).then((module) => {
+//             res = module.LoadComponent(div, params); // Do work in component
+//         }).catch(err => {            
+//             res = '{"err" : '+ err +'}';
+//             console.log(err);
+//         });
+//         return res;
+//     }    
+// }
 
 /*
 // Import class component

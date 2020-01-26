@@ -1,22 +1,5 @@
 # JsComponent
-How to import, export components in pure javascript (class, function, template)
+Javascript SPA router. See how to import, export components in pure javascript (class, function, template). 
 
-### TODO with history.js
- - Create router with routes (or components)
- ```js
- new Router({
-	["/", "./page-index.js", "#app"],
-	["/about", "./page-about.js", "#app"]
-});
-```
-
- - OnPopStateChange, OnHashChange load components from router
-```js
-window.onpopstate = function(event) {
-    console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-}
-
-window.onhashchange = function(event) {
-    console.log("OnHashChange Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-}
-```
+### TODO
+ - Regex routes with {slug} params
