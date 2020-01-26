@@ -48,13 +48,13 @@ export default class Router
         window.onpopstate = function(event) {
             // console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
             console.log("OnPopState Load Component: ", document.location.pathname)
-            Router.importComponent("#app", './module.js', history.state, document.location.pathname)
+            Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
         }
 
         window.onhashchange = function(event) {
             console.log("OnHashChange Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
             console.log("OnHashChange Load Component: ", document.location.pathname)
-            Router.importComponent("#app", './module.js', history.state, document.location.pathname)
+            Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
         }
     }
 

@@ -11,7 +11,7 @@ class Page extends Component
 		m.innerHTML = html
 
 		// Add event to html
-		this.addEvent("#boo-click", (item,index) => { Alert("Clicked ", location.pathname); });
+		this.addEvent("#boo-click", (item,index) => { alert("Clicked " + location.pathname); });
 
 		return { html, txt }
 	}
