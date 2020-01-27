@@ -20,7 +20,7 @@ r.addRoute("/post/{id}/image/{name}", "/components/page3.js");
 Router.Init()
 ```
 
-### Add router script
+### Add router
 index.html
 ```html
 <script src="/main.js" type="module"></script>
