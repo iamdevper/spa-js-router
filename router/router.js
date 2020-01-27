@@ -82,7 +82,7 @@ export default class Router
 
     // Import home page
     importMain(div,file, params)
-    {
+    {        
         import(file).then(module => {
             let obj = module.LoadComponent(div, params);
             console.log("Main say: ", obj, window.Routes);
@@ -120,6 +120,6 @@ export default class Router
 
     // Load external links redirects
     static Init(){        
-        this.importComponent(window.App, window.AppMain, history.state)
+        Router.importComponent(window.App, window.AppMain, history.state)
     }
 }
