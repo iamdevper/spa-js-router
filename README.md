@@ -16,8 +16,8 @@ r.addRoute("/page2", "/components/page2.js");
 r.addRoute("/page/{id}", "/components/page3.js");
 r.addRoute("/post/{id}/image/{name}", "/components/page3.js");
 
-// Links from external pages to this page
-Router.externalLinks()
+// Load external links redirects
+Router.Init()
 ```
 
 ### Add router script
