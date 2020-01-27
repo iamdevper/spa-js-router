@@ -1,8 +1,8 @@
-import Component from './component.js'
+import Component from '/router/component.js'
 
 class Page extends Component
 {	
-	Setup(div, data) 
+	Setup(div, data = []) 
 	{		
 		console.log("Component params ", data);
 
@@ -13,7 +13,7 @@ class Page extends Component
 		// Add event to html
 		this.addEvent("#boo-click", (item,index) => { alert("Clicked " + location.pathname); });
 
-		return { html, txt }
+		return { html }
 	}
 }
 

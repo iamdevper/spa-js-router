@@ -1,4 +1,4 @@
-import Component from './component.js'
+import Component from '/router/component.js'
 
 class Page extends Component
 {	
@@ -8,10 +8,10 @@ class Page extends Component
 
 		let m = document.querySelector(div)
 
-		let txt = 'Hello from component 1!'
+		let txt = 'Hello from component 2!'
 		// m.textContent = txt
 
-		let html = '<h1 id="boo-click"> Welcome on page 1! Click here! </h1> <p>' + location.pathname + '</p>'
+		let html = '<h1 id="boo-click"> Welcome on page 2! Click here! </h1> <p>' + location.pathname + '</p>'
 		m.innerHTML = html
 
 		// Add event to html

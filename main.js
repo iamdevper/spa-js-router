@@ -1,11 +1,14 @@
-import Router from './router.js'
+import Router from '/router/router.js'
 
-let r = new Router("./module.js");
-r.addRoute("/", "./module.js");
-r.addRoute("/page1", "./module-page1.js");
-r.addRoute("/page2", "./module-page2.js");
-r.addRoute("/page/{id}", "./module-page3.js");
-r.addRoute("/post/{id}/image/{name}", "./module-page3.js");
+// Add router
+let r = new Router();
 
-// Links from external pages to this page
-Router.externalLinks()
+// Add routes
+r.addRoute("/", "/components/home.js");
+r.addRoute("/page1", "/components/page1.js");
+r.addRoute("/page2", "/components/page2.js");
+r.addRoute("/page/{id}", "/components/page3.js");
+r.addRoute("/post/{id}/image/{name}", "/components/page3.js");
+
+// Init() Load redirected links
+Router.Init()

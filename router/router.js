@@ -2,30 +2,32 @@ export default class Router
 {
     Routes = []
 
-    constructor(main = "./module.js", div = "#app") 
+    constructor(main = "/components/home.js", div = "#app") 
     {
         window.App = div
         window.AppMain = main
         this.app = div
         this.addOnLoad();
         this.addOnState();
-        // Import main
+        // Import main page
         this.importMain(div, main, [])
     }
 
+    // Add routes
     addRoute(route, file)
     {
         this.Routes.push({ route, file });
         window.Routes = this.Routes
     }
 
+    // Pages links 
     addOnLoad()
     {
         window.onload = function(){
             console.log("OnLoad history urls");
             // History popstate for a href urls
             var List = document.querySelectorAll("a")
-            List.forEach(function(item){                
+            List.forEach(function(item){
                 var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
                 if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0){
                     console.log("External link ", item.href);
@@ -43,47 +45,42 @@ export default class Router
         }
     }
 
+    // History state
     addOnState()
     {
         window.onpopstate = function(event) {
             // console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
             console.log("OnPopState Load Component: ", document.location.pathname)
-            Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
-        }
-
-        window.onhashchange = function(event) {
-            console.log("OnHashChange Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-            console.log("OnHashChange Load Component: ", document.location.pathname)
-            Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
-        }
+            Router.importComponent(window.App, window.AppMain, history.state)
+        }        
     }
 
-    static importComponent(div, file, params = [], route)
+    // Load page component
+    static importComponent(div, file, params = [])
     {
         let routes = window.Routes;
         console.log("Routes App: ", routes);
 
-        routes.forEach(function(item, index){
-            
-            console.log("Routes !!!: ", item.route, item.file, location.pathname)            
-            
-            // if(item.route == route){
-            if(Router.testSlug(item.route, location.pathname))
+        for(let item of routes)
+        {
+            console.log("Routes !!!: ", item.route, item.file, location.pathname)
+
+            if(this.testSlug(item.route, location.pathname))
             {
                 file = item.file;
-
                 import(file).then(module => {
                     let obj = module.LoadComponent(div, params);
                     console.log("Component say: ", obj, window.Routes);
-                })
-                .catch(err => { 
-                    // console.log(err.message);
+                }).catch((err) => { 
+                    console.log(err);
                 }); // Promise import
-            }            
-            
-        })        
+            }else{
+                // Error page goes here :). By default redirect to home page.
+            }
+        }     
     }
 
+    // Import home page
     importMain(div,file, params)
     {
         import(file).then(module => {
@@ -91,10 +88,11 @@ export default class Router
             console.log("Main say: ", obj, window.Routes);
         })
         .catch(err => { 
-            // console.log(err.message);
+            console.log(err);
         });
     }
 
+    // Check route, uri
     static testSlug(route, uri){        
         if(uri === route){
             console.log("URL SLUG ", uri);
@@ -120,7 +118,8 @@ export default class Router
         return false;
     }
 
-    static externalLinks(){
-        Router.importComponent(window.App, window.AppMain, history.state, document.location.pathname)
+    // Load external links redirects
+    static Init(){        
+        this.importComponent(window.App, window.AppMain, history.state)
     }
 }
