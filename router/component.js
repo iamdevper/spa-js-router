@@ -34,6 +34,17 @@ export default class Component
 		})
 	}
 
+	queryParam(id){
+		const urlParams = new URLSearchParams(window.location.search);
+		return urlParams.get(id);
+	}
+
+	urlParams(){		
+		return window.location.pathname.split('/').filter(function (el) {
+			return el != null;
+		});
+	}
+
 	Setup(){
 		return 'Override this';
 	}
