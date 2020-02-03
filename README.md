@@ -29,7 +29,7 @@ index.html
 ### Apache2 .htaccess
 ```bash
 RewriteEngine on
-Rewritebase /
+# RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
