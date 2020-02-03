@@ -47,16 +47,16 @@ server {
 	...
 
 	location / {
-        # Get file or folder or redirect uri to index.html
-        try_files $uri $uri/ /index.html;
+		# Get file or folder or redirect uri to index.html
+		try_files $uri $uri/ /index.html;
 
-        # Get file or folder or redirect uri to url param in index.php
-        # try_files $uri $uri/ /index.php?url=$uri&$args;
+		# Get file or folder or redirect uri to url param in index.php
+		# try_files $uri $uri/ /index.php?url=$uri&$args;
 
-        # Get file or folder or error
-        # try_files $uri $uri/ =404;
-    }
+		# Get file or folder or error
+		# try_files $uri $uri/ =404;
+	}
 
-    ...
+	...
 }
 ```
