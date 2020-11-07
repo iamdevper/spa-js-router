@@ -24,6 +24,21 @@ Router.Init()
 index.html
 ```html
 <script src="/main.js" type="module"></script>
+<body>
+	<div id="app">
+		<h2> Loading ... </h2>
+		<h4> <img src="/loader.gif"> </h4>
+	</div>
+
+	<div id="links">
+		<a href="/">Home</a>
+		<a href="/page1">page 1</a>
+		<a href="/page2">page 2</a>
+		<a href="/page/123">page/{id}</a>
+		<a href="/post/123/image/Name123">post/{id}/image/{name}</a>
+		<a href="https://redirect.page">External page link</a>
+	</div>
+</body>
 ```
 
 ### Page sample
@@ -34,13 +49,15 @@ class Page extends Component
 {	
 	Setup(div, data) 
 	{		
+		document.title = 'Homepage title text';
+		
 		console.log("Component params ", data);
 
 		// Get app div 
 		let m = document.querySelector(div)
 		
 		// Add text to app div
-		// let txt = 'Hello from component!'
+		let txt = 'Hello from component!'
 		// m.textContent = txt
 
 		// Add html to ap div
