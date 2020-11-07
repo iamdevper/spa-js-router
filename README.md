@@ -26,6 +26,42 @@ index.html
 <script src="/main.js" type="module"></script>
 ```
 
+### Page sample
+```js
+import Component from '/router/component.js'
+
+class Page extends Component
+{	
+	Setup(div, data) 
+	{		
+		console.log("Component params ", data);
+
+		// Get app div 
+		let m = document.querySelector(div)
+		
+		// Add text to app div
+		// let txt = 'Hello from component!'
+		// m.textContent = txt
+
+		// Add html to ap div
+		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
+		m.innerHTML = html
+
+		// Add event to tag
+		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item); });
+
+		return { html, txt }
+	}
+}
+
+// Export function
+export function LoadComponent(div, data) {
+	let p = new Page();	
+	return p.Setup(div, data);	
+}
+```
+
+
 ### Apache2 .htaccess
 ```bash
 RewriteEngine on
@@ -45,7 +81,8 @@ DirectoryIndex index.html index.php
 ```bash
 server {
 	...
-
+	index index.html;
+	
 	location / {
 		# Get file or folder or redirect uri to index.html
 		try_files $uri $uri/ /index.html;
