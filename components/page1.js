@@ -3,7 +3,9 @@ import Component from '/router/component.js'
 class Page extends Component
 {	
 	Setup(div, data) 
-	{		
+	{
+        document.title = 'Page 1';
+		
 		console.log("Component params ", data);
 
 		let m = document.querySelector(div)
