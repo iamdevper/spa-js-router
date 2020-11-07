@@ -4,6 +4,8 @@ class Page extends Component
 {	
 	Setup(div, data) 
 	{		
+        	document.title = 'Homepage title text';
+
 		console.log("Component params ", data);
 
 		let m = document.querySelector(div)
