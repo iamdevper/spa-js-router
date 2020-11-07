@@ -4,6 +4,8 @@ class Page extends Component
 {	
 	Setup(div, data) 
 	{		
+        document.title = 'Page 2';
+
 		console.log("Component params ", data);
 
 		let m = document.querySelector(div)
