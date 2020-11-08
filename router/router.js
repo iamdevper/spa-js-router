@@ -18,6 +18,7 @@ export default class Router
 	// Add routes
 	addRoute(route, file)
 	{
+		if(route === "") { route = "/"; }
 		this.Routes.push({ route, file });
 		window.Routes = this.Routes
 	}
