@@ -20,11 +20,13 @@ class Page extends Component
 			.then((json) => {
 				console.log("Fetching ...", json);
 				let d = document.getElementById('json');
-				let txt = '';
-				json.forEach((i) => {
-					txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
-				});
-				d.innerHTML = txt;
+				if(d) {
+					let txt = '';
+					json.forEach((i) => {
+						txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
+					});
+					d.innerHTML = txt;
+				}
 			})
 		}, "click");
 
@@ -35,13 +37,16 @@ class Page extends Component
 			.then((json) => {
 				console.log("Fetching ...", json);
 				let d = document.getElementById('json');
-				let txt = '';
-				json.forEach((i) => {
-					txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
-				});
-				d.innerHTML = txt;
+				if(d) {
+					let txt = '';
+					json.forEach((i) => {
+						txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
+					});
+					d.innerHTML = txt;
+				}
 			})
-		}, 'popstate');
+			// window.removeEventListener('popstate', null);
+		}, 'popstate'); // hashchange, popstate, load
 
 		return { 'html': html, 'events': [e1], 'onload': [e2] }
 	}
