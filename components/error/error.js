@@ -8,6 +8,9 @@ class Page extends Component
 
 		let html = '<h1 id="boo-click"> Error 404! Page does not exists! </a>'
 
+		let m = document.querySelector(div)
+		if(m) { m.innerHTML = html; }
+
 		return { html }
 	}
 }
