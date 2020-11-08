@@ -33,31 +33,30 @@ import Component from '/router/component.js'
 
 class Page extends Component
 {
-	Setup(div, data)
+	Setup(div)
 	{
+		// GET request params
+		let id = this.queryParam('id');
+		let name = this.queryParam('name');
+
+		// Page title
 		document.title = 'Homepage title text';
 
-		console.log("Component params ", data);
-
-		let m = document.querySelector(div)
-
-		let txt = 'Hello from component!'
-		// m.textContent = txt
-
+		// Html
 		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
-		m.innerHTML = html
 
 		// Add event to html
-		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item); });
+		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
 
-		return { html, txt }
+		// Return html, events
+		return { 'html': html, 'events': this.Events }
 	}
 }
 
 // Export function
-export function LoadComponent(div, data) {
+export function LoadComponent(div) {
 	let p = new Page();
-	return p.Setup(div, data);
+	return p.Setup(div);
 }
 ```
 
