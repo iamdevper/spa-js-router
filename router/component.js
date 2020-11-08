@@ -1,25 +1,5 @@
 export default class Component
 {
-	Events = []
-
-	addEvent(id, cb, type = "click", prevent = false, stop = false){
-		this.Events.push({ 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop });
-	}
-
-	runEvent(id, cb, type = "click", prevent = false, stop = false){
-		document.querySelectorAll(id).forEach((item,index) => {
-			item.addEventListener(type, e => {
-				if(prevent){
-					e.preventDefault();
-				}
-				if(stop){
-					e.stopPropagation();
-				}
-				cb(item,index);
-			})
-		})
-	}
-
 	addScript(url)
 	{
 		var h = document.createElement('script')

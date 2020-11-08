@@ -1,3 +1,5 @@
+import Event from '/router/event.js'
+
 // Globals
 var Routes = [];
 var AppDiv = '#app';
@@ -36,11 +38,11 @@ export default class Router
 			console.log("Load page: ", obj);
 			let m = document.querySelector(div)
 			if(m) {
-				m.innerHTML = obj.html
+				m.innerHTML = obj.html // Add html
 			}
 			if(obj.events) {
 				obj.events.forEach((i) => {
-					this.runEvent(i.id, i.cb, i.type, i.prevent, i.stop);
+					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
 				});
 			}
 		})
@@ -103,7 +105,7 @@ export default class Router
 					}
 					if(obj.events) {
 						obj.events.forEach((i) => {
-							this.runEvent(i.id, i.cb, i.type, i.prevent, i.stop);
+							Event.run(i.id, i.cb, i.type, i.prevent, i.stop);
 						});
 					}
 					return;
@@ -137,19 +139,5 @@ export default class Router
 				return false;
 			}
 		}
-	}
-
-	static runEvent(id, cb, type = "click", prevent = false, stop = false){
-		document.querySelectorAll(id).forEach((item,index) => {
-			item.addEventListener(type, e => {
-				if(prevent){
-					e.preventDefault();
-				}
-				if(stop){
-					e.stopPropagation();
-				}
-				cb(item,index);
-			})
-		})
 	}
 }

@@ -1,4 +1,5 @@
 import Component from '/router/component.js'
+import Event from '/router/event.js'
 
 class Page extends Component
 {
@@ -15,10 +16,11 @@ class Page extends Component
 		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
 
 		// Add event to html
-		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
+		let e1 = Event.add("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
+		let e2 = Event.add("#boo-click", (item,index) => { console.log("Clicked right mouse! ", item, index); }, "auxclick");
 
 		// Return html, events
-		return { 'html': html, 'events': this.Events }
+		return { 'html': html, 'events': [e1,e2] }
 	}
 }
 
