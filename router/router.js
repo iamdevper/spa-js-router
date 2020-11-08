@@ -45,6 +45,11 @@ export default class Router
 					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
 				});
 			}
+			if(obj.onload) {
+				obj.onload.forEach((i) => {
+					Event.runOnLoad(i.cb, i.type);
+				});
+			}
 		})
 		.catch(err => {
 			console.log(err);

@@ -26,5 +26,12 @@ export default class Event
 		window.addEventListener(type, (e) => {
 			cb(e);
 		})
-    }
+	}
+
+	static clear(type = "popstate")
+	{
+		window.addEventListener(type, function (event) {
+			event.stopPropagation();
+		}, true);
+	}
 }
