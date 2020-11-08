@@ -16,7 +16,7 @@ export default class Router
 		this.addOnLoad();
 
 		// Load error page
-		this.loadPage(AppDiv, AppErrorPage, []);
+		this.loadPage(AppDiv, AppErrorPage);
 	}
 
 	addRoute(route, file) {
@@ -26,14 +26,14 @@ export default class Router
 
 	init(){
 		console.log("Init ...");
-		Router.importComponent(AppDiv, AppMainPage, history.state, Routes)
+		Router.importComponent(AppDiv, AppMainPage, Routes)
 	}
 
-	loadPage(div, file, params)
+	loadPage(div, file)
 	{
 		import(file).then(module => {
-			let obj = module.LoadComponent(div, params);
-			console.log("Load page: ", obj, Routes);
+			let obj = module.LoadComponent(div);
+			console.log("Load page: ", obj);
 		})
 		.catch(err => {
 			console.log(err);
@@ -46,7 +46,7 @@ export default class Router
 		window.onpopstate = function(event) {
 			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
 			console.log("OnPopState Load Component: ", document.location.pathname)
-			Router.importComponent(AppDiv, AppMainPage, history.state, Routes)
+			Router.importComponent(AppDiv, AppMainPage, Routes)
 		}
 	}
 
@@ -76,7 +76,7 @@ export default class Router
 	}
 
 	// Load page component
-	static importComponent(div, file, params = [], routes = [])
+	static importComponent(div, file, routes = [])
 	{
 		for(let item of routes)
 		{
@@ -86,8 +86,8 @@ export default class Router
 			{
 				file = item.file;
 				import(file).then(module => {
-					let obj = module.LoadComponent(div, params);
-					console.log("Page component: ", obj, routes);
+					let obj = module.LoadComponent(div);
+					console.log("Page component: ", obj);
 					return;
 				}).catch((err) => {
 					console.log("Page import error: ", err);

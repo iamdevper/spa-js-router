@@ -2,24 +2,19 @@ import Component from '/router/component.js'
 
 class Page extends Component
 {
-	Setup(div, data)
+	Setup(div)
 	{
 		document.title = 'Page 2';
 
-		console.log("Component params ", data);
+		let html = '<h1 id="boo-click"> Welcome on page 2! Click here! </h1> <p>' + location.pathname + '</p>'
 
 		let m = document.querySelector(div)
-
-		let txt = 'Hello from component 2!'
-		// m.textContent = txt
-
-		let html = '<h1 id="boo-click"> Welcome on page 2! Click here! </h1> <p>' + location.pathname + '</p>'
-		m.innerHTML = html
+		if(m) { m.innerHTML = html; }
 
 		// Add event to html
 		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item); });
 
-		return { html, txt }
+		return { html }
 	}
 }
 
