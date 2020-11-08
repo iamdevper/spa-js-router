@@ -1,15 +1,15 @@
 export default class Component
 {
 	addEvent(id, cb, type = "click", prevent = false, stop = false){
-		document.querySelectorAll(id).forEach((item,index) => {	
-			item.addEventListener(type, e => {	
+		document.querySelectorAll(id).forEach((item,index) => {
+			item.addEventListener(type, e => {
 				if(prevent){
 					e.preventDefault();
 				}
 				if(stop){
 					e.stopPropagation();
 				}
-			    cb(item,index);
+				cb(item,index);
 			})
 		})
 	}
@@ -17,11 +17,11 @@ export default class Component
 	addScript(url)
 	{
 		var h = document.createElement('script')
-	    h.setAttribute("type","text/javascript")
-	    h.setAttribute("src", url)
-	    if (typeof h != "undefined"){
-	        document.getElementsByTagName("head")[0].appendChild(h)
-	    }
+		h.setAttribute("type","text/javascript")
+		h.setAttribute("src", url)
+		if (typeof h != "undefined"){
+			document.getElementsByTagName("head")[0].appendChild(h)
+		}
 	}
 
 	fetchGet(url) {
@@ -39,7 +39,7 @@ export default class Component
 		return urlParams.get(id);
 	}
 
-	urlParams(){		
+	urlParams(){
 		return window.location.pathname.split('/').filter(function (el) {
 			return el != null;
 		});

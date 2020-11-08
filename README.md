@@ -1,5 +1,5 @@
-# SPA Javascript Router
-Javascript SPA router. See how to dynamically import, export components with pure javascript in browser (class, function, template). 
+# SimpleSPA Javascript Router
+Javascript SPA router. See how to dynamically import, export components with pure javascript in browser (class, function, template).
 
 ### Router
 main.js

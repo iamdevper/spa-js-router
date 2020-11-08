@@ -4,7 +4,7 @@ class Page extends Component
 {
 	Setup(div, data)
 	{
-        document.title = 'Homepage title text';
+		document.title = 'Homepage title text';
 
 		console.log("Component params ", data);
 

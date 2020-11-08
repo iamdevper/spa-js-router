@@ -1,10 +1,10 @@
 import Component from '/router/component.js'
 
 class Page extends Component
-{	
-	Setup(div, data) 
-	{		
-        document.title = 'Page 2';
+{
+	Setup(div, data)
+	{
+		document.title = 'Page 2';
 
 		console.log("Component params ", data);
 
@@ -25,6 +25,6 @@ class Page extends Component
 
 // Export function
 export function LoadComponent(div, data) {
-	let p = new Page();	
-	return p.Setup(div, data);	
+	let p = new Page();
+	return p.Setup(div, data);
 }

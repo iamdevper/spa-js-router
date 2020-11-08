@@ -4,7 +4,7 @@ class Page extends Component
 {
 	Setup(div, data)
 	{
-        document.title = 'Error 404';
+		document.title = 'Error 404';
 
 		console.log("Component params ", data);
 

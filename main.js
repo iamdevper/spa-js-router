@@ -4,6 +4,7 @@ import Router from '/router/router.js'
 let r = new Router();
 
 // Add routes
+r.addRoute("", "/components/home.js");
 r.addRoute("/", "/components/home.js");
 r.addRoute("/page1", "/components/page1.js");
 r.addRoute("/page2", "/components/page2.js");
