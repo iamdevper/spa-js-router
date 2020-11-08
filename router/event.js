@@ -2,6 +2,10 @@ export default class Event
 {
     static add(id, cb, type = "click", prevent = false, stop = false){
         return { 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop };
+	}
+
+	static addOnLoad(cb, type){
+        return { 'cb': cb, 'type': type };
     }
 
     static run(id, cb, type = "click", prevent = false, stop = false){
@@ -15,6 +19,12 @@ export default class Event
 				}
 				cb(item,index);
 			})
+		})
+	}
+
+	static runOnLoad(cb, type = "load"){
+		window.addEventListener(type, (e) => {
+			cb(e);
 		})
     }
 }

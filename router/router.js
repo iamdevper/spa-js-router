@@ -108,6 +108,11 @@ export default class Router
 							Event.run(i.id, i.cb, i.type, i.prevent, i.stop);
 						});
 					}
+					if(obj.onload) {
+						obj.onload.forEach((i) => {
+							Event.runOnLoad(i.cb, i.type);
+						});
+					}
 					return;
 				}).catch((err) => {
 					console.log("Page import error: ", err);
