@@ -34,6 +34,15 @@ export default class Router
 		import(file).then(module => {
 			let obj = module.LoadComponent(div);
 			console.log("Load page: ", obj);
+			let m = document.querySelector(div)
+			if(m) {
+				m.innerHTML = obj.html
+			}
+			if(obj.events) {
+				obj.events.forEach((i) => {
+					this.runEvent(i.id, i.cb, i.type, i.prevent, i.stop);
+				});
+			}
 		})
 		.catch(err => {
 			console.log(err);
@@ -88,6 +97,15 @@ export default class Router
 				import(file).then(module => {
 					let obj = module.LoadComponent(div);
 					console.log("Page component: ", obj);
+					let m = document.querySelector(div)
+					if(m) {
+						m.innerHTML = obj.html
+					}
+					if(obj.events) {
+						obj.events.forEach((i) => {
+							this.runEvent(i.id, i.cb, i.type, i.prevent, i.stop);
+						});
+					}
 					return;
 				}).catch((err) => {
 					console.log("Page import error: ", err);
@@ -119,5 +137,19 @@ export default class Router
 				return false;
 			}
 		}
+	}
+
+	static runEvent(id, cb, type = "click", prevent = false, stop = false){
+		document.querySelectorAll(id).forEach((item,index) => {
+			item.addEventListener(type, e => {
+				if(prevent){
+					e.preventDefault();
+				}
+				if(stop){
+					e.stopPropagation();
+				}
+				cb(item,index);
+			})
+		})
 	}
 }
