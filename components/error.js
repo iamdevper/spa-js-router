@@ -4,7 +4,7 @@ class Page extends Component
 {
 	Setup(div, data)
 	{
-        document.title = 'Homepage title text';
+        document.title = 'Error 404';
 
 		console.log("Component params ", data);
 
@@ -13,11 +13,11 @@ class Page extends Component
 		let txt = 'Hello from component!'
 		// m.textContent = txt
 
-		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
+		let html = '<h1 id="boo-click"> Error 404! Page does not exists! </a>'
 		m.innerHTML = html
 
 		// Add event to html
-		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item); });
+		this.addEvent("#boo-click", (item,index) => { location.href = '/'; });
 
 		return { html, txt }
 	}
