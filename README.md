@@ -7,7 +7,7 @@ main.js
 import Router from '/router/router.js'
 
 // Start router
-let r = new Router("/components/home.js");
+let r = new Router("#app");
 
 // Add routes
 r.addRoute("/", "/components/home.js");
@@ -17,13 +17,48 @@ r.addRoute("/page/{id}", "/components/page3.js");
 r.addRoute("/post/{id}/image/{name}", "/components/page3.js");
 
 // Load external links redirects
-Router.Init()
+r.init();
 ```
 
 ### Add router
 index.html
 ```html
 <script src="/main.js" type="module"></script>
+```
+
+### Page sample
+nano /components/home.js
+```js
+import Component from '/router/component.js'
+
+class Page extends Component
+{
+	Setup(div, data)
+	{
+		document.title = 'Homepage title text';
+
+		console.log("Component params ", data);
+
+		let m = document.querySelector(div)
+
+		let txt = 'Hello from component!'
+		// m.textContent = txt
+
+		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
+		m.innerHTML = html
+
+		// Add event to html
+		this.addEvent("#boo-click", (item,index) => { console.log("Clicked! ", item); });
+
+		return { html, txt }
+	}
+}
+
+// Export function
+export function LoadComponent(div, data) {
+	let p = new Page();
+	return p.Setup(div, data);
+}
 ```
 
 ### Apache2 .htaccess

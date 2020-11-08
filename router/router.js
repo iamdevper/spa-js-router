@@ -1,26 +1,53 @@
+// Globals
+var Routes = [];
+var AppDiv = '#app';
+var AppMainPage = '';
+var AppErrorPage = '';
+
 export default class Router
 {
-	Routes = []
-	static ErrorPage = '/components/error.js';
-	static error404 = 1;
+	constructor(div = '#app', main = "/components/home.js", error = "/components/error/error.js",) {
+		// Globals
+		AppDiv = div;
+		AppMainPage = main;
+		AppErrorPage = error;
 
-	constructor(main = "/components/home.js", div = "#app")
-	{
-		window.App = div
-		window.AppMain = main
-		this.app = div
-		this.addOnLoad();
 		this.addOnState();
-		// Import main page
-		this.importMain(div, main, [])
+		this.addOnLoad();
+
+		// Load error page
+		this.loadPage(AppDiv, AppErrorPage, []);
 	}
 
-	// Add routes
-	addRoute(route, file)
-	{
+	addRoute(route, file) {
 		if(route === "") { route = "/"; }
-		this.Routes.push({ route, file });
-		window.Routes = this.Routes
+		Routes.push({ route, file });
+	}
+
+	init(){
+		console.log("Init ...");
+		Router.importComponent(AppDiv, AppMainPage, history.state, Routes)
+	}
+
+	loadPage(div, file, params)
+	{
+		import(file).then(module => {
+			let obj = module.LoadComponent(div, params);
+			console.log("Load page: ", obj, Routes);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+
+	// History state
+	addOnState()
+	{
+		window.onpopstate = function(event) {
+			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
+			console.log("OnPopState Load Component: ", document.location.pathname)
+			Router.importComponent(AppDiv, AppMainPage, history.state, Routes)
+		}
 	}
 
 	// Pages links
@@ -48,22 +75,9 @@ export default class Router
 		}
 	}
 
-	// History state
-	addOnState()
-	{
-		window.onpopstate = function(event) {
-			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-			console.log("OnPopState Load Component: ", document.location.pathname)
-			Router.importComponent(window.App, window.AppMain, history.state)
-		}
-	}
-
 	// Load page component
-	static importComponent(div, file, params = [])
+	static importComponent(div, file, params = [], routes = [])
 	{
-		let routes = window.Routes;
-		console.log("Routes App: ", routes);
-
 		for(let item of routes)
 		{
 			console.log("Route: ", item.route, item.file, location.pathname)
@@ -73,45 +87,13 @@ export default class Router
 				file = item.file;
 				import(file).then(module => {
 					let obj = module.LoadComponent(div, params);
-					console.log("Component: ", obj, window.Routes);
-					this.error404 = 0;
+					console.log("Page component: ", obj, routes);
 					return;
 				}).catch((err) => {
 					console.log("Page import error: ", err);
 				}); // Promise import
 			}
 		}
-
-		// Error page goes here :).
-		if(this.error404 == 1) {
-			this.loadPage(div, this.ErrorPage);
-		}
-	}
-
-	static loadPage(div, file)
-	{
-		console.log("Error page: ", file);
-
-		import(file).then(module => {
-			let obj = module.LoadComponent(div, []);
-			console.log("Error page: ", obj);
-			return 1;
-		}).catch((err) => {
-			console.log(err);
-			return 0;
-		}); // Promise import
-	}
-
-	// Import home page
-	importMain(div,file, params)
-	{
-		import(file).then(module => {
-			let obj = module.LoadComponent(div, params);
-			console.log("Main say: ", obj, window.Routes);
-		})
-		.catch(err => {
-			console.log(err);
-		});
 	}
 
 	// Check route, uri
@@ -137,11 +119,5 @@ export default class Router
 				return false;
 			}
 		}
-		return false;
-	}
-
-	// Load external links redirects
-	static Init(){
-		Router.importComponent(window.App, window.AppMain, history.state)
 	}
 }
