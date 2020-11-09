@@ -30,27 +30,48 @@ index.html
 nano /components/home.js
 ```js
 import Component from '/router/component.js'
+import Event from '/router/event.js'
 
 class Page extends Component
 {
 	Setup(div)
 	{
-		// GET request params
-		let id = this.queryParam('id');
-		let name = this.queryParam('name');
+		document.title = 'Page 2';
 
-		// Page title
-		document.title = 'Homepage title text';
+		let html = '<h1 id="boo-click"> Fetch data on click!!! </h1> <p>' + location.pathname + '</p> <div id="json"></div>'
 
-		// Html
-		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and Click here! </a>'
+		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
+		let e1 = Event.add("#boo-click", (item,index) => {
+			fetch('https://jsonplaceholder.typicode.com/todos/10')
+			.then(response => response.json())
+			.then((json) => {
+				console.log("Fetching ...", json);
+				let d = document.getElementById('json'); // div id
+				if(d) {
+					let i = json;
+					d.innerHTML = '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
+				}
+			})
+		}, "click");
 
-		// Add event to html
-		let e1 = Event.add("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
-		let e2 = Event.add("#boo-click", (item,index) => { console.log("Clicked right mouse! ", item, index); }, "auxclick");
+		// Window events: hashchange, popstate, load
+		let e2 = Event.addOnLoad((event) => {
+			fetch('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=20')
+			.then(response => response.json())
+			.then((json) => {
+				console.log("Fetching ...", json);
+				let d = document.getElementById('json'); // div id
+				if(d) {
+					let txt = '';
+					json.forEach((i) => {
+						txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
+					});
+					d.innerHTML = txt;
+				}
+			})
+		}, 'popstate'); // hashchange, popstate, load (popstate - after local link click)
 
-		// Return html, events
-		return { 'html': html, 'events': [e1,e2] }
+		return { 'html': html, 'events': [e1], 'onload': [e2] }
 	}
 }
 
@@ -59,21 +80,6 @@ export function LoadComponent(div) {
 	let p = new Page();
 	return p.Setup(div);
 }
-```
-
-### Apache2 .htaccess
-```bash
-RewriteEngine on
-# RewriteBase /
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-# Rewrite to index.html
-RewriteRule ^(.*)$ /index.html [NC,L,QSA]
-# Rewrite to index.php
-# RewriteRule ^(.*)$ /index.php?uri=$1 [NC,L,QSA]
-
-DirectoryIndex index.html index.php
 ```
 
 ### Nginx
@@ -94,4 +100,19 @@ server {
 
 	...
 }
+```
+
+### Apache2 .htaccess
+```bash
+RewriteEngine on
+# RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Rewrite to index.html
+RewriteRule ^(.*)$ /index.html [NC,L,QSA]
+# Rewrite to index.php
+# RewriteRule ^(.*)$ /index.php?uri=$1 [NC,L,QSA]
+
+DirectoryIndex index.html index.php
 ```
