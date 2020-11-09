@@ -15,7 +15,7 @@ class Page extends Component
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index) => {
-			fetch('https://jsonplaceholder.typicode.com/todos/123')
+			fetch('https://jsonplaceholder.typicode.com/todos/10')
 			.then(response => response.json())
 			.then((json) => {
 				console.log("Fetching ...", json);
@@ -29,7 +29,8 @@ class Page extends Component
 
 		// Window events: hashchange, popstate, load
 		let e2 = Event.addOnLoad((event) => {
-			fetch('https://jsonplaceholder.typicode.com/todos')
+			// fetch('http://jsonplaceholder.typicode.com/photos?_start=0&_limit=20')
+			fetch('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=20')
 			.then(response => response.json())
 			.then((json) => {
 				console.log("Fetching ...", json);
