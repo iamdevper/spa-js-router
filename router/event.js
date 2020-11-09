@@ -1,14 +1,14 @@
 export default class Event
 {
-    static add(id, cb, type = "click", prevent = false, stop = false){
-        return { 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop };
+	static add(id, cb, type = "click", prevent = false, stop = false){
+		return { 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop };
 	}
 
 	static addOnLoad(cb, type){
-        return { 'cb': cb, 'type': type };
-    }
+		return { 'cb': cb, 'type': type };
+	}
 
-    static run(id, cb, type = "click", prevent = false, stop = false){
+	static run(id, cb, type = "click", prevent = false, stop = false){
 		document.querySelectorAll(id).forEach((item,index) => {
 			item.addEventListener(type, event => {
 				if(prevent){

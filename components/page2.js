@@ -1,5 +1,6 @@
 import Component from '/router/component.js'
 import Event from '/router/event.js'
+import Store from '/components/store.js'
 
 class Page extends Component
 {
@@ -11,35 +12,13 @@ class Page extends Component
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index) => {
-			fetch('https://jsonplaceholder.typicode.com/todos/10')
-			.then(response => response.json())
-			.then((json) => {
-				console.log("Fetching ...", json);
-				let d = document.getElementById('json'); // div id
-				if(d) {
-					let i = json;
-					d.innerHTML = '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
-				}
-			})
+			Store.FetchId(11);
 		}, "click");
 
 		// Window events: hashchange, popstate, load
 		let e2 = Event.addOnLoad((event) => {
-			// fetch('http://jsonplaceholder.typicode.com/photos?_start=0&_limit=20')
-			fetch('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=20')
-			.then(response => response.json())
-			.then((json) => {
-				console.log("Fetching ...", json);
-				let d = document.getElementById('json'); // div id
-				if(d) {
-					let txt = '';
-					json.forEach((i) => {
-						txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
-					});
-					d.innerHTML = txt;
-				}
-			})
-		}, 'popstate'); // hashchange, popstate, load (popstate - after local link click)
+			Store.FetchAll(0,30);
+		}, 'popstate'); // popstate - after local link click
 
 		return { 'html': html, 'events': [e1], 'onload': [e2] }
 	}
