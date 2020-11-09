@@ -84,6 +84,7 @@ export function LoadComponent(div) {
 server {
 	...
 
+	index index.html
 	location / {
 		# Get file or folder or redirect uri to index.html
 		try_files $uri $uri/ /index.html;
