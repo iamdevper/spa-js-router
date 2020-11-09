@@ -4,7 +4,7 @@ export default class Event
 		return { 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop };
 	}
 
-	static addOnLoad(cb, type){
+	static addOnLoad(cb, type = "popstate"){
 		return { 'cb': cb, 'type': type };
 	}
 
@@ -17,22 +17,17 @@ export default class Event
 				if(stop){
 					event.stopPropagation();
 				}
-				cb(item,index);
+				cb(item,index,event);
 			}, false)
 		})
 	}
 
 	static runOnLoad(cb, type = "load"){
-		window.addEventListener(type, cb(event), true)
-		// window.addEventListener(type, (e) => {
-		// 	cb(e);
-		// }, true)
+		window.addEventListener(type, cb(event), false)
 	}
 
 	static clear(type = "popstate")
 	{
-		window.addEventListener(type, function (event) {
-			event.stopPropagation();
-		}, false);
+		window.addEventListener(type, event.stopPropagation(), false);
 	}
 }
