@@ -10,12 +10,12 @@ export default class Event
 
     static run(id, cb, type = "click", prevent = false, stop = false){
 		document.querySelectorAll(id).forEach((item,index) => {
-			item.addEventListener(type, e => {
+			item.addEventListener(type, event => {
 				if(prevent){
-					e.preventDefault();
+					event.preventDefault();
 				}
 				if(stop){
-					e.stopPropagation();
+					event.stopPropagation();
 				}
 				cb(item,index);
 			}, false)

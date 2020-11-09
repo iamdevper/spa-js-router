@@ -13,30 +13,27 @@ class Page extends Component
 
 		let html = '<h1 id="boo-click"> Fetch data on click!!! </h1> <p>' + location.pathname + '</p> <div id="json"></div>'
 
-		// Document events
+		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index) => {
-			fetch('https://jsonplaceholder.typicode.com/todos')
+			fetch('https://jsonplaceholder.typicode.com/todos/123')
 			.then(response => response.json())
 			.then((json) => {
 				console.log("Fetching ...", json);
-				let d = document.getElementById('json');
+				let d = document.getElementById('json'); // div id
 				if(d) {
-					let txt = '';
-					json.forEach((i) => {
-						txt += '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
-					});
-					d.innerHTML = txt;
+					let i = json;
+					d.innerHTML = '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>'+i.compleded+'</div></li>';
 				}
 			})
 		}, "click");
 
-		// Change page event
+		// Window events: hashchange, popstate, load
 		let e2 = Event.addOnLoad((event) => {
 			fetch('https://jsonplaceholder.typicode.com/todos')
 			.then(response => response.json())
 			.then((json) => {
 				console.log("Fetching ...", json);
-				let d = document.getElementById('json');
+				let d = document.getElementById('json'); // div id
 				if(d) {
 					let txt = '';
 					json.forEach((i) => {
@@ -45,8 +42,7 @@ class Page extends Component
 					d.innerHTML = txt;
 				}
 			})
-			// window.removeEventListener('popstate', null);
-		}, 'popstate'); // hashchange, popstate, load
+		}, 'popstate'); // hashchange, popstate, load (popstate - after local link click)
 
 		return { 'html': html, 'events': [e1], 'onload': [e2] }
 	}
