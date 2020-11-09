@@ -23,7 +23,24 @@ r.init();
 ### Add router
 index.html
 ```html
-<script src="/main.js" type="module"></script>
+<head>
+	<script src="/main.js" type="module"></script>
+</head>
+<body id="body">
+	<div id="links">
+		<a href="/">home</a>
+		<a href="/page1">age</a>
+		<a href="/page2">fetch data</a>
+		<a href="/page/123">page/{id}</a>
+		<a href="/post/123/image/Name123">post/{id}/image/{name}</a>
+		<a href="https://www.pagani.com">External page link</a>
+	</div>
+
+	<div id="app">
+		<h2> Loading ... </h2>
+		<h4> <img src="/loader.gif"> </h4>
+	</div>
+</body>
 ```
 
 ### Page sample
