@@ -7,9 +7,9 @@ class Page extends Component
 	{
 		document.title = 'Page 1';
 
-		let html = '<h1 id="boo-click"> Welcome on page 1! Click here! </h1> <p>' + location.pathname + '</p>'
+		let html = '<h1 id="boo-click"> Page one, click here! </h1> <p>' + location.pathname + '</p>'
 
-		let e1 = Event.add("#boo-click", (item,index) => { console.log("Clicked! ", item); });
+		let e1 = Event.add("#boo-click", (item,index) => { alert("Clicked! " + item.innerHTML); });
 
 		return { 'html': html, 'events': [e1] }
 	}
