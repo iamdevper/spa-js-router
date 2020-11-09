@@ -11,7 +11,7 @@ class Page extends Component
 		let html = '<h1 id="boo-click"> Fetch data on click! </h1> <p>' + location.pathname + '</p> <div id="json"></div>'
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
-		let e1 = Event.add("#boo-click", (item,index) => {
+		let e1 = Event.add("#boo-click", (item,index,event) => {
 			Store.FetchId(11);
 		}, "click");
 
