@@ -8,7 +8,9 @@ export default class Store
 			let d = document.getElementById('json'); // div id
 			if(d) {
 				let i = json;
-				d.innerHTML = '<li><div>'+i.id+'</div><div>'+i.title+'</div><div>UserId-'+i.userId+'</div></li>';
+				let task = 'Completed';
+				if(i.completed) { task = 'Open'; }
+				d.innerHTML = '<li><div class="float-left">'+i.id+'</div><div>'+i.title+'</div><div class="float-right">'+task+'</div></li>';
 			}
 		})
 	}
@@ -22,7 +24,9 @@ export default class Store
 			if(d) {
 				let txt = '';
 				json.forEach((i) => {
-					txt += '<li><div class="float-left">'+i.id+'</div><div>'+i.title+'</div><div class="float-right"> UserId-'+i.userId+'</div></li>';
+					let task = 'Completed';
+					if(i.completed) { task = 'Open'; }
+					txt += '<li><div class="float-left">'+i.id+'</div><div>'+i.title+'</div><div class="float-right">'+task+'</div></li>';
 				});
 				d.innerHTML = txt;
 			}
