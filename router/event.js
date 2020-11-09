@@ -18,20 +18,21 @@ export default class Event
 					e.stopPropagation();
 				}
 				cb(item,index);
-			})
+			}, false)
 		})
 	}
 
 	static runOnLoad(cb, type = "load"){
-		window.addEventListener(type, (e) => {
-			cb(e);
-		})
+		window.addEventListener(type, cb(event), true)
+		// window.addEventListener(type, (e) => {
+		// 	cb(e);
+		// }, true)
 	}
 
 	static clear(type = "popstate")
 	{
 		window.addEventListener(type, function (event) {
 			event.stopPropagation();
-		}, true);
+		}, false);
 	}
 }

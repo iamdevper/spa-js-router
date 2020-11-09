@@ -19,6 +19,9 @@ export default class Router
 
 		// Load error page
 		this.loadPage(AppDiv, AppErrorPage);
+
+		console.log(window.top);
+		// Array.from(document.querySelectorAll("*")).forEach(e => { const ev = getEventListeners(e); if (Object.keys(ev).length !== 0) {console.log(e, ev)} })
 	}
 
 	addRoute(route, file) {
