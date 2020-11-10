@@ -8,8 +8,8 @@ var AppErrorPage = '';
 
 export default class Router
 {
-	constructor(div = '#app', main = "/components/home.js", error = "/components/error/error.js",) {
-		// Globals
+	constructor(div = '#app', main = "/components/home.js", error = "/components/error/error.js")
+	{
 		AppDiv = div;
 		AppMainPage = main;
 		AppErrorPage = error;
@@ -19,17 +19,16 @@ export default class Router
 
 		// Load error page
 		this.loadPage(AppDiv, AppErrorPage);
-
-		console.log(window.top);
-		// Array.from(document.querySelectorAll("*")).forEach(e => { const ev = getEventListeners(e); if (Object.keys(ev).length !== 0) {console.log(e, ev)} })
 	}
 
-	addRoute(route, file) {
+	addRoute(route, file)
+	{
 		if(route === "") { route = "/"; }
 		Routes.push({ route, file });
 	}
 
-	init(){
+	init()
+	{
 		console.log("Init ...");
 		Router.importComponent(AppDiv, AppMainPage, Routes)
 	}
@@ -72,17 +71,18 @@ export default class Router
 	// Pages links
 	addOnLoad()
 	{
-		window.onload = function(){
-			console.log("OnLoad history urls");
+		// window.onload = function(){ /* ... */ }
+		window.addEventListener('DOMContentLoaded', () => {
+			console.log('OnLoad history urls');
 			// History popstate for a href urls
 			var List = document.querySelectorAll("a")
-			List.forEach(function(item){
+			List.forEach(function(item) {
 				var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
-				if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0){
+				if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
 					console.log("External link ", item.href);
 					item.setAttribute('target', '_blank');
-				}else{
-					item.addEventListener('click', function(e){
+				} else {
+					item.addEventListener('click', function(e) {
 						e.preventDefault()
 						window.history.pushState({page: item.href}, "Title "+item.href, item.href)
 						var popStateEvent = new PopStateEvent('popstate', { state: history.state })
@@ -91,7 +91,7 @@ export default class Router
 					}, false)
 				}
 			})
-		}
+		}, false);
 	}
 
 	// Load page component
@@ -130,15 +130,16 @@ export default class Router
 	}
 
 	// Check route, uri
-	static testSlug(route, uri){
-		if(uri === route){
+	static testSlug(route, uri)
+	{
+		if(uri === route) {
 			console.log("URL SLUG ", uri);
 			return true;
-		}else{
+		} else {
 			let re = /{[a-z]+}/g;
 			let arr = route.match(re);
-			if(arr != null){
-				for(let i of arr){
+			if(arr != null) {
+				for(let i of arr) {
 					console.log("id ", i)
 					route = route.replace(i, "[0-9a-zA-Z_.-]+")
 				}
@@ -146,9 +147,9 @@ export default class Router
 
 			let reg = "^" + route + "/?$"
 			reg = new RegExp(reg,"g");
-			if(reg.test(uri)){
+			if(reg.test(uri)) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		}

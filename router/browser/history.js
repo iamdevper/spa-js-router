@@ -43,3 +43,6 @@ window.onload = function(){
 		}
 	})
 }
+
+// All events
+// Array.from(document.querySelectorAll("*")).forEach(e => { const ev = getEventListeners(e); if (Object.keys(ev).length !== 0) {console.log(e, ev)} })
