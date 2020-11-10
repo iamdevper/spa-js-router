@@ -56,7 +56,7 @@ class Page extends Component
 	{
 		document.title = 'Page 2';
 
-		let html = '<h1 id="boo-click"> Fetch data on click! </h1> <p class="btn">' + location.pathname + '</p> <div id="json"></div>'
+		let html = '<h1 id="boo-click"> Fetch data on click! </h1> <p class="btn" data-id="123">' + location.pathname + '</p> <div id="json"></div>';
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index,event) => {
@@ -64,7 +64,7 @@ class Page extends Component
 		}, "click");
 
 		let e2 = Event.add(".btn", (item,index,event) => {
-			alert("Path clicked", event);
+			alert("Path clicked: " + event.target.dataset.id);
 		}, "click");
 
 		// Window events: hashchange, popstate, load
