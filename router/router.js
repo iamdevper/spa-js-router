@@ -17,8 +17,14 @@ export default class Router
 		this.addOnState();
 		this.addOnLoad();
 
-		// Load error page
-		this.loadPage(AppDiv, AppErrorPage);
+		// Load homepage
+		// this.loadPage(AppDiv, AppMainPage);
+	}
+
+	static getInstance()
+	{
+		if (!instance) { var instance = Router.prototype.constructor(); }
+		return instance;
 	}
 
 	addRoute(route, file)
@@ -38,6 +44,32 @@ export default class Router
 		import(file).then(module => {
 			let obj = module.LoadComponent(div);
 			console.log("Load page: ", obj);
+			let m = document.querySelector(div)
+			if(m) {
+				m.innerHTML = obj.html // Add html
+			}
+			if(obj.events) {
+				obj.events.forEach((i) => {
+					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
+				});
+			}
+			if(obj.onload) {
+				obj.onload.forEach((i) => {
+					Event.runOnLoad(i.cb, i.type);
+				});
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+
+	static loadPage404(div, file)
+	{
+		console.log("Loading Error 404" , file)
+		import(file).then(module => {
+			let obj = module.LoadComponent(div);
+			console.log("Error page: ", obj);
 			let m = document.querySelector(div)
 			if(m) {
 				m.innerHTML = obj.html // Add html
@@ -95,16 +127,18 @@ export default class Router
 	}
 
 	// Load page component
-	static importComponent(div, file, routes = [])
+	static async importComponent(div, file, routes = [])
 	{
+		let ShowError = true;
+
 		for(let item of routes)
 		{
-			console.log("Route: ", item.route, item.file, location.pathname)
-
 			if(this.testSlug(item.route, location.pathname))
 			{
+				console.log("Route: ", item.route, item.file, location.pathname, ShowError)
+
 				file = item.file;
-				import(file).then(module => {
+				await import(file).then(module => {
 					let obj = module.LoadComponent(div);
 					console.log("Page component: ", obj);
 					let m = document.querySelector(div)
@@ -121,11 +155,19 @@ export default class Router
 							Event.runOnLoad(i.cb, i.type);
 						});
 					}
+					ShowError = false
+					console.log("Show error:", ShowError);
 					return;
 				}).catch((err) => {
 					console.log("Page import error: ", err);
 				}); // Promise import
 			}
+		}
+
+		if(ShowError)
+		{
+			console.log("Show error:", ShowError);
+			Router.loadPage404(AppDiv, AppErrorPage);
 		}
 	}
 
