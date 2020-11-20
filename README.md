@@ -49,15 +49,12 @@ nano /components/home.js
 import Component from '/router/component.js'
 import Event from '/router/event.js'
 import Store from '/components/store.js'
+import View from '/components/view/view.js'
 
 class Page extends Component
 {
 	Setup(div)
 	{
-		document.title = 'Page 2';
-
-		let html = '<h1 id="boo-click"> Fetch data on click! </h1> <p class="btn" data-id="123">' + location.pathname + '</p> <div id="json"></div>';
-
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index,event) => {
 			Store.FetchId(11);
@@ -71,6 +68,12 @@ class Page extends Component
 		let e3 = Event.addOnLoad((event) => {
 			Store.FetchAll(0,30);
 		}, 'popstate'); // popstate - after local link click
+
+		// Page title
+		document.title = 'Page 2 - Load data';
+
+		// Html content from class
+		let html = View.Html(location.pathname)
 
 		return { 'html': html, 'events': [e1,e2], 'onload': [e3] }
 	}
