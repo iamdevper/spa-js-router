@@ -1,14 +1,15 @@
 import Component from '/router/component.js'
 import Event from '/router/event.js'
 import Store from '/components/store.js'
+import View from '/components/view/view.js'
 
 class Page extends Component
 {
 	Setup(div)
 	{
-		document.title = 'Page 2';
+		document.title = 'Page 2 - Load data';
 
-		let html = '<h1 id="boo-click"> Fetch data on click! </h1> <p class="btn" data-id="123">' + location.pathname + '</p> <div id="json"></div>'
+		let html = View.Html(location.pathname)
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.add("#boo-click", (item,index,event) => {
