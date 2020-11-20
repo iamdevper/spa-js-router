@@ -29,7 +29,7 @@ index.html
 <body id="body">
 	<div id="links">
 		<a href="/">home</a>
-		<a href="/page1">age</a>
+		<a href="/page1">page</a>
 		<a href="/page2">fetch data</a>
 		<a href="/page/123">page/{id}</a>
 		<a href="/post/123/image/Name123">post/{id}/image/{name}</a>
