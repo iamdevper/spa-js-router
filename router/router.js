@@ -63,32 +63,6 @@ export default class Router
 		});
 	}
 
-	static loadPage404(div, file)
-	{
-		console.log("Loading Error 404" , file)
-		import(file).then(module => {
-			let obj = new module.Page().Setup(div);
-			console.log("Error page: ", obj);
-			let m = document.querySelector(div)
-			if(m) {
-				m.innerHTML = obj.html // Add html
-			}
-			if(obj.document_events) {
-				obj.document_events.forEach((i) => {
-					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
-				});
-			}
-			if(obj.window_events) {
-				obj.window_events.forEach((i) => {
-					Event.runOnLoad(i.cb, i.type);
-				});
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
-	}
-
 	// History state
 	addOnState()
 	{
@@ -140,8 +114,9 @@ export default class Router
 
 		if(ShowError)
 		{
+			// Error page
 			console.log("Show error:", ShowError);
-			Router.loadPage404(AppDiv, AppErrorPage);
+			await this.loadPage(AppDiv, AppErrorPage);
 		}
 	}
 
