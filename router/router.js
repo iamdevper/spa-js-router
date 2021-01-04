@@ -16,9 +16,6 @@ export default class Router
 
 		this.addOnState();
 		this.addOnLoad();
-
-		// Load homepage
-		// this.loadPage(AppDiv, AppMainPage);
 	}
 
 	static getInstance()
@@ -42,7 +39,7 @@ export default class Router
 	loadPage(div, file)
 	{
 		import(file).then(module => {
-			let obj = module.LoadComponent(div);
+			let obj = new module.Page().Setup(div);
 			console.log("Load page: ", obj);
 			let m = document.querySelector(div)
 			if(m) {
