@@ -1,10 +1,10 @@
 export default class Event
 {
-	static add(id, cb, type = "click", prevent = false, stop = false){
+	static addDocument(id, cb, type = "click", prevent = false, stop = false){
 		return { 'id': id, 'cb': cb, 'type': type, 'prevent': prevent, 'stop': stop };
 	}
 
-	static addOnLoad(cb, type = "popstate"){
+	static addWindow(cb, type = "popstate"){
 		return { 'cb': cb, 'type': type };
 	}
 

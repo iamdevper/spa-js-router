@@ -5,6 +5,7 @@ var Routes = [];
 var AppDiv = '#app';
 var AppMainPage = '';
 var AppErrorPage = '';
+var ShowError = true;
 
 export default class Router
 {
@@ -36,28 +37,29 @@ export default class Router
 		Router.importComponent(AppDiv, AppMainPage, Routes)
 	}
 
-	loadPage(div, file)
+	static async loadPage(div, file)
 	{
-		import(file).then(module => {
+		await import(file).then(module => {
 			let obj = new module.Page().Setup(div);
 			console.log("Load page: ", obj);
 			let m = document.querySelector(div)
 			if(m) {
 				m.innerHTML = obj.html // Add html
 			}
-			if(obj.events) {
-				obj.events.forEach((i) => {
+			if(obj.document_events) {
+				obj.document_events.forEach((i) => {
 					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
 				});
 			}
-			if(obj.onload) {
-				obj.onload.forEach((i) => {
+			if(obj.window_events) {
+				obj.window_events.forEach((i) => {
 					Event.runOnLoad(i.cb, i.type);
 				});
 			}
+			ShowError = false
 		})
 		.catch(err => {
-			console.log(err);
+			console.log("Page import error: ", err);
 		});
 	}
 
@@ -71,13 +73,13 @@ export default class Router
 			if(m) {
 				m.innerHTML = obj.html // Add html
 			}
-			if(obj.events) {
-				obj.events.forEach((i) => {
+			if(obj.document_events) {
+				obj.document_events.forEach((i) => {
 					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
 				});
 			}
-			if(obj.onload) {
-				obj.onload.forEach((i) => {
+			if(obj.window_events) {
+				obj.window_events.forEach((i) => {
 					Event.runOnLoad(i.cb, i.type);
 				});
 			}
@@ -126,38 +128,13 @@ export default class Router
 	// Load page component
 	static async importComponent(div, file, routes = [])
 	{
-		let ShowError = true;
-
 		for(let item of routes)
 		{
 			if(this.testSlug(item.route, location.pathname))
 			{
 				console.log("Route: ", item.route, item.file, location.pathname, ShowError)
-
 				file = item.file;
-				await import(file).then(module => {
-					let obj = new module.Page().Setup(div);
-					console.log("Page component: ", obj);
-					let m = document.querySelector(div)
-					if(m) {
-						m.innerHTML = obj.html
-					}
-					if(obj.events) {
-						obj.events.forEach((i) => {
-							Event.run(i.id, i.cb, i.type, i.prevent, i.stop);
-						});
-					}
-					if(obj.onload) {
-						obj.onload.forEach((i) => {
-							Event.runOnLoad(i.cb, i.type);
-						});
-					}
-					ShowError = false
-					console.log("Show error:", ShowError);
-					return;
-				}).catch((err) => {
-					console.log("Page import error: ", err);
-				}); // Promise import
+				await this.loadPage(div, file);
 			}
 		}
 

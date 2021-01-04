@@ -56,16 +56,16 @@ export class Page extends Component
 	Setup(div)
 	{
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
-		let e1 = Event.add("#boo-click", (item,index,event) => {
+		let e1 = Event.addDocument("#boo-click", (item,index,event) => {
 			Store.FetchId(11);
 		}, "click");
 
-		let e2 = Event.add(".btn", (item,index,event) => {
+		let e2 = Event.addDocument(".btn", (item,index,event) => {
 			alert("Path clicked: " + event.target.dataset.id);
 		}, "click");
 
 		// Window events: hashchange, popstate, load
-		let e3 = Event.addOnLoad((event) => {
+		let e3 = Event.addWindow((event) => {
 			Store.FetchAll(0,30);
 		}, 'popstate'); // popstate - after local link click
 
@@ -75,7 +75,7 @@ export class Page extends Component
 		// Html content from class
 		let html = View.Html(location.pathname)
 
-		return { 'html': html, 'events': [e1,e2], 'onload': [e3] }
+		return { 'html': html, 'document_events': [e1,e2], 'window_events': [e3] }
 	}
 }
 ```

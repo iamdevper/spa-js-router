@@ -16,16 +16,10 @@ export class Page extends Component
 		let html = '<h1 id="boo-click"> Open console: <small>CTRL + SHIFT + K</small> and click here! </a>'
 
 		// Add event to html
-		let e1 = Event.add("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
-		let e2 = Event.add("#boo-click", (item,index) => { console.log("Clicked right mouse! ", item, index); }, "auxclick");
+		let e1 = Event.addDocument("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
+		let e2 = Event.addDocument("#boo-click", (item,index) => { console.log("Clicked right mouse! ", item, index); }, "auxclick");
 
 		// Return html, events
-		return { 'html': html, 'events': [e1,e2] }
+		return { 'html': html, 'document_events': [e1,e2] }
 	}
 }
-
-// Export function
-// export function LoadComponent(div) {
-// 	let p = new Page();
-// 	return p.Setup(div);
-// }

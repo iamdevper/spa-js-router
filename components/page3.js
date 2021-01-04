@@ -9,8 +9,8 @@ export class Page extends Component
 
 		let html = '<h1 id="boo-click"> Page with id and name, click here! </h1> <p>' + location.pathname + '</p>'
 
-		let e1 = Event.add("#boo-click", (item,index) => { alert("Clicked " + location.pathname); });
+		let e1 = Event.addDocument("#boo-click", (item,index) => { alert("Clicked " + location.pathname); });
 
-		return { 'html': html, 'events': [e1] }
+		return { 'html': html, 'document_events': [e1] }
 	}
 }
