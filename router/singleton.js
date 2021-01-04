@@ -1,13 +1,24 @@
+/*
+let si1 = new Singleton();
+let si2 = Singleton.getInstance();
+console.log('Singleton? ', si1 === si2 );
+*/
+
 export default class Singleton
 {
-	constructor() {
+	constructor(cnf = null)
+	{
 		if (!Singleton._instance) {
 			Singleton._instance = this;
 		}
+
+		this.cnf = cnf;
+
 		return Singleton._instance;
 	}
 
-	static getInstance() {
+	static getInstance()
+	{
 		return this._instance;
 	}
 }
