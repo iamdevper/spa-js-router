@@ -1,7 +1,7 @@
 import Component from '/router/component.js'
 import Event from '/router/event.js'
 
-class Page extends Component
+export class Page extends Component
 {
 	Setup(div)
 	{
@@ -13,10 +13,4 @@ class Page extends Component
 
 		return { 'html': html, 'events': [e1] }
 	}
-}
-
-// Export function
-export function LoadComponent(div) {
-	let p = new Page();
-	return p.Setup(div);
 }

@@ -43,7 +43,7 @@ index.html
 </body>
 ```
 
-### Page component with store class
+### Page component class
 nano /components/home.js
 ```js
 import Component from '/router/component.js'
@@ -51,7 +51,7 @@ import Event from '/router/event.js'
 import Store from '/components/store.js'
 import View from '/components/view/view.js'
 
-class Page extends Component
+export class Page extends Component
 {
 	Setup(div)
 	{
@@ -77,12 +77,6 @@ class Page extends Component
 
 		return { 'html': html, 'events': [e1,e2], 'onload': [e3] }
 	}
-}
-
-// Export function
-export function LoadComponent(div) {
-	let p = new Page();
-	return p.Setup(div);
 }
 ```
 
@@ -119,5 +113,5 @@ RewriteRule ^(.*)$ /index.html [NC,L,QSA]
 # Rewrite to index.php
 # RewriteRule ^(.*)$ /index.php?uri=$1 [NC,L,QSA]
 
-DirectoryIndex index.html index.php
+DirectoryIndex index.html
 ```

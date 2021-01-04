@@ -3,7 +3,7 @@ import Event from '/router/event.js'
 import Store from '/components/store.js'
 import View from '/components/view/view.js'
 
-class Page extends Component
+export class Page extends Component
 {
 	Setup(div)
 	{
@@ -27,10 +27,4 @@ class Page extends Component
 
 		return { 'html': html, 'events': [e1,e2], 'onload': [e3] }
 	}
-}
-
-// Export function
-export function LoadComponent(div) {
-	let p = new Page();
-	return p.Setup(div);
 }

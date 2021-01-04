@@ -139,7 +139,7 @@ export default class Router
 
 				file = item.file;
 				await import(file).then(module => {
-					let obj = module.LoadComponent(div);
+					let obj = new module.Page().Setup(div);
 					console.log("Page component: ", obj);
 					let m = document.querySelector(div)
 					if(m) {
