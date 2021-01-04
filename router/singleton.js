@@ -1,9 +1,3 @@
-/*
-let si1 = new Singleton();
-let si2 = Singleton.getInstance();
-console.log('Singleton? ', si1 === si2 );
-*/
-
 export default class Singleton
 {
 	constructor(cnf = null)
@@ -22,3 +16,11 @@ export default class Singleton
 		return this._instance;
 	}
 }
+
+/*
+import Singleton from '/router/singleton.js'
+
+let si1 = new Singleton();
+let si2 = Singleton.getInstance();
+console.log('Singleton? ', si1 === si2 );
+*/
