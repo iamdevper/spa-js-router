@@ -68,7 +68,7 @@ export default class Router
 	{
 		console.log("Loading Error 404" , file)
 		import(file).then(module => {
-			let obj = module.LoadComponent(div);
+			let obj = new module.Page().Setup(div);
 			console.log("Error page: ", obj);
 			let m = document.querySelector(div)
 			if(m) {
