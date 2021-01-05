@@ -98,9 +98,9 @@ chmod -R 2775 /var/www/html/spa.xx
 
 server {
 	listen 80;
-    listen [::]:80;
-    server_name spa.xx;
-    root /var/www/html/spa.xx;
+	listen [::]:80;
+	server_name spa.xx;
+	root /var/www/html/spa.xx;
 	index index.html
 
 	location / {
@@ -117,11 +117,11 @@ server {
 	# disable_symlinks off;
 
 	# File upload size
-    # client_max_body_size 100M;
+	# client_max_body_size 100M;
 
 	# Tls redirect
-    # return 301 https://$host$request_uri;
-    # return 301 https://spa.xx$request_uri;
+	# return 301 https://$host$request_uri;
+	# return 301 https://spa.xx$request_uri;
 }
 ```
 
