@@ -6,7 +6,7 @@ export class Page extends Component
 	{
 		document.title = 'Error 404';
 
-		let html = '<h1 id="boo-click"> Error 404! Page does not exists! </a>'
+		let html = '<h1 id="boo-click"> Error 404! Page does not exists! </h1>'
 
 		return { html }
 	}
