@@ -14,12 +14,14 @@ export default class Router
 		AppDiv = div;
 		AppMainPage = main;
 		AppErrorPage = error;
+
+		Router.addOnState();
 	}
 
 	static getInstance()
 	{
-		if (!_instance) { var _instance = Router.prototype.constructor(); }
-		return _instance;
+		if (!instance) { var instance = Router.prototype.constructor(); }
+		return instance;
 	}
 
 	addRoute(route, file)
@@ -60,21 +62,43 @@ export default class Router
 		});
 	}
 
-	static addHrefBlank()
+	// History state
+	static addOnState()
+	{
+		window.onpopstate = function(event) {
+			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
+			console.log("OnPopState Load Component: ", document.location.pathname)
+			Router.importComponent(AppDiv, AppMainPage, Routes)
+		}
+	}
+
+	// Pages links
+	static addOnLoad()
 	{
 		// window.onload = function(){ /* ... */ }
-		// window.addEventListener('DOMContentLoaded', () => {
-			console.log('Add blank to href');
-			// History popstate for a href urls
-			var List = document.querySelectorAll("a")
-			List.forEach(function(item) {
-				var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
-				if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
-					console.log("External link ", item.href);
-					item.setAttribute('target', '_blank');
-				}
-			})
-		// }, false);
+		window.removeEventListener('DOMContentLoaded', () => {}, true);
+		window.addEventListener('DOMContentLoaded', Router.addLinks(), true);
+	}
+
+	static addLinks(e = null)
+	{
+		// History popstate for a href urls
+		var List = document.querySelectorAll("a")
+		List.forEach(function(item) {
+			var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
+			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
+				console.log("External link ", item.href);
+				item.setAttribute('target', '_blank');
+			} else {
+				item.addEventListener('click', function(e) {
+					e.preventDefault()
+					window.history.pushState({page: item.href}, "Title "+item.href, item.href)
+					var popStateEvent = new PopStateEvent('popstate', { state: history.state })
+					dispatchEvent(popStateEvent)
+					console.log('Item history ', history.state)
+				}, true)
+			}
+		})
 	}
 
 	// Load page component
@@ -90,14 +114,14 @@ export default class Router
 			}
 		}
 
-		Router.addHrefBlank()
-
 		if(ShowError)
 		{
 			// Error page
 			console.log("Show error:", ShowError);
 			await this.loadPage(AppDiv, AppErrorPage);
 		}
+
+		Router.addOnLoad();
 	}
 
 	// Check route, uri

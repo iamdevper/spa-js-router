@@ -9,7 +9,7 @@ export class Page extends Component
 	{
 		document.title = 'Page 2 - Load data';
 
-		let html = View.Html(location.pathname)
+		let html = View.HtmlLinks() + View.Html(location.pathname)
 
 		// Document events: click, dblclick, change, keydown, contextmenu, auxclick, mouseover ...
 		let e1 = Event.addDocument("#boo-click", (item,index,event) => {
