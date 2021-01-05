@@ -13,7 +13,7 @@ export class Page extends Component
 		document.title = 'Homepage title text';
 
 		// Html
-		let html = '<h1 id="boo-click"> Open console: <small>CTRL + SHIFT + K</small> and click here! </a>'
+		let html = '<h1 id="boo-click"> Open console: CTRL + SHIFT + K and click here! </h1>';
 
 		// Add event to html
 		let e1 = Event.addDocument("#boo-click", (item,index) => { console.log("Clicked! ", item, index); }, "click");
