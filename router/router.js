@@ -6,14 +6,16 @@ var AppDiv = '#app';
 var AppMainPage = '';
 var AppErrorPage = '';
 var ShowError = true;
+var ShowLog = true;
 
 export default class Router
 {
-	constructor(div = '#app', main = "/components/home.js", error = "/components/error/error.js")
+	constructor(div = '#app', show_log = true, main = "/components/home.js", error = "/components/error/error.js")
 	{
 		AppDiv = div;
 		AppMainPage = main;
 		AppErrorPage = error;
+		ShowLog = show_log;
 
 		Router.addOnState();
 	}
@@ -40,7 +42,9 @@ export default class Router
 	{
 		await import(file).then(module => {
 			let obj = new module.Page().Setup(div);
-			console.log("Load page: ", obj);
+			if(ShowLog) {
+				console.log("Page loaded!", obj);
+			}
 			let m = document.querySelector(div)
 			if(m) {
 				m.innerHTML = obj.html // Add html
@@ -66,8 +70,9 @@ export default class Router
 	static addOnState()
 	{
 		window.onpopstate = function(event) {
-			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-			console.log("OnPopState Load Component: ", document.location.pathname)
+			if(ShowLog) {
+				console.log("OnPopState Hash: " + document.location.hash, " Component: " + document.location.pathname, "State: " + JSON.stringify(event.state))
+			}
 			Router.importComponent(AppDiv, AppMainPage, Routes)
 		}
 	}
@@ -76,8 +81,8 @@ export default class Router
 	static addOnLoad()
 	{
 		// window.onload = function(){ /* ... */ }
-		window.removeEventListener('DOMContentLoaded', () => {}, true);
-		window.addEventListener('DOMContentLoaded', Router.addLinks(), true);
+		// window.removeEventListener('DOMContentLoaded', () => {}, false);
+		window.addEventListener('DOMContentLoaded', Router.addLinks(), false);
 	}
 
 	static addLinks(e = null)
@@ -87,7 +92,9 @@ export default class Router
 		List.forEach(function(item) {
 			var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
 			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
-				console.log("External link ", item.href);
+				if(ShowLog) {
+					console.log("External link ", item.href);
+				}
 				item.setAttribute('target', '_blank');
 			} else {
 				item.addEventListener('click', function(e) {
@@ -95,7 +102,9 @@ export default class Router
 					window.history.pushState({page: item.href}, "Title "+item.href, item.href)
 					var popStateEvent = new PopStateEvent('popstate', { state: history.state })
 					dispatchEvent(popStateEvent)
-					console.log('Item history ', history.state)
+					if(ShowLog) {
+						console.log('Item history ', history.state)
+					}
 				}, true)
 			}
 		})
@@ -128,14 +137,16 @@ export default class Router
 	static testSlug(route, uri)
 	{
 		if(uri === route) {
-			console.log("URL SLUG ", uri);
+			if(ShowLog) {
+				console.log("URL SLUG ", uri);
+			}
 			return true;
 		} else {
 			let re = /{[a-z]+}/g;
 			let arr = route.match(re);
 			if(arr != null) {
 				for(let i of arr) {
-					console.log("id ", i)
+					// console.log("Param: ", i)
 					route = route.replace(i, "[0-9a-zA-Z_.-]+")
 				}
 			}

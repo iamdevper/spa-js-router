@@ -1,7 +1,7 @@
 import Router from '/router/router.js'
 
-// Add router
-let r = new Router('#app');
+// Add router, show logs
+let r = new Router('#app', true);
 
 // Add routes
 r.addRoute("/", "/components/home.js");

@@ -6,8 +6,11 @@ main.js
 ```js
 import Router from '/router/router.js'
 
+// Show logs
+let log = true;
+
 // Start router
-let r = new Router("#app");
+let r = new Router("#app", log);
 
 // Add routes
 r.addRoute("/", "/components/home.js");
@@ -64,7 +67,7 @@ export class Page extends Component
 		document.title = 'Page 2 - Load data';
 
 		// Html content from class
-		let html = View.Html(location.pathname)
+		let html = View.HtmlLinks() + View.Html(location.pathname)
 
 		return { 'html': html, 'document_events': [e1,e2], 'window_events': [e3] }
 	}
