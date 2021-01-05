@@ -89,6 +89,13 @@ chown -R your-user-name:www-data /var/www/html/spa.xx
 chmod -R 2775 /var/www/html/spa.xx
 ```
 
+### Domain local host
+nano /etc/hosts
+````sh
+# Add to /etc/hosts file
+127.0.0.1	spa.xx www.spa.xx
+```
+
 ### Nginx
 ```bash
 # Add to file
