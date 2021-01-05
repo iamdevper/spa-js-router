@@ -14,15 +14,12 @@ export default class Router
 		AppDiv = div;
 		AppMainPage = main;
 		AppErrorPage = error;
-
-		this.addOnState();
-		this.addOnLoad();
 	}
 
 	static getInstance()
 	{
-		if (!instance) { var instance = Router.prototype.constructor(); }
-		return instance;
+		if (!_instance) { var _instance = Router.prototype.constructor(); }
+		return _instance;
 	}
 
 	addRoute(route, file)
@@ -63,22 +60,11 @@ export default class Router
 		});
 	}
 
-	// History state
-	addOnState()
-	{
-		window.onpopstate = function(event) {
-			// console.log("OnPopState Hash " + document.location.hash, " Location: " + document.location.pathname, "state: " + JSON.stringify(event.state))
-			console.log("OnPopState Load Component: ", document.location.pathname)
-			Router.importComponent(AppDiv, AppMainPage, Routes)
-		}
-	}
-
-	// Pages links
-	addOnLoad()
+	static addHrefBlank()
 	{
 		// window.onload = function(){ /* ... */ }
-		window.addEventListener('DOMContentLoaded', () => {
-			console.log('OnLoad history urls');
+		// window.addEventListener('DOMContentLoaded', () => {
+			console.log('Add blank to href');
 			// History popstate for a href urls
 			var List = document.querySelectorAll("a")
 			List.forEach(function(item) {
@@ -86,17 +72,9 @@ export default class Router
 				if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
 					console.log("External link ", item.href);
 					item.setAttribute('target', '_blank');
-				} else {
-					item.addEventListener('click', function(e) {
-						e.preventDefault()
-						window.history.pushState({page: item.href}, "Title "+item.href, item.href)
-						var popStateEvent = new PopStateEvent('popstate', { state: history.state })
-						dispatchEvent(popStateEvent)
-						console.log('Item history ', history.state)
-					}, false)
 				}
 			})
-		}, false);
+		// }, false);
 	}
 
 	// Load page component
@@ -111,6 +89,8 @@ export default class Router
 				await this.loadPage(div, file);
 			}
 		}
+
+		Router.addHrefBlank()
 
 		if(ShowError)
 		{
