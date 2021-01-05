@@ -97,17 +97,22 @@ export default class Router
 				}
 				item.setAttribute('target', '_blank');
 			} else {
-				item.addEventListener('click', function(e) {
-					e.preventDefault()
-					window.history.pushState({page: item.href}, "Title "+item.href, item.href)
-					var popStateEvent = new PopStateEvent('popstate', { state: history.state })
-					dispatchEvent(popStateEvent)
-					if(ShowLog) {
-						console.log('Item history ', history.state)
-					}
-				}, true)
+				Router.addClickEvent(item);
 			}
 		})
+	}
+
+	static addClickEvent(item)
+	{
+		item.addEventListener('click', function(e) {
+			e.preventDefault()
+			window.history.pushState({page: item.href}, "Title "+item.href, item.href)
+			var popStateEvent = new PopStateEvent('popstate', { state: history.state })
+			dispatchEvent(popStateEvent)
+			if(ShowLog) {
+				console.log('Link history state:', history.state)
+			}
+		}, true)
 	}
 
 	// Load page component
