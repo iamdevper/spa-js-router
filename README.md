@@ -80,38 +80,65 @@ export class Page extends Component
 }
 ```
 
+### Install js spa
+```sh
+# Get with git
+git clone https://github.com/moovspace/spa-js-router.git /var/www/html/spa.xx
+# Permissions
+chown -R your-user-name:www-data /var/www/html/spa.xx
+chmod -R 2775 /var/www/html/spa.xx
+```
+
 ### Nginx
 ```bash
-server {
-	...
+# Add to file
+# /etc/nginx/sites-available/default
+# Restart nginx
+# sudo service nginx restart
 
+server {
+	listen 80;
+    listen [::]:80;
+    server_name spa.xx;
+    root /var/www/html/spa.xx;
 	index index.html
+
 	location / {
 		# Get file or folder or redirect uri to index.html
 		try_files $uri $uri/ /index.html;
 
 		# Get file or folder or redirect uri to url param in index.php
 		# try_files $uri $uri/ /index.php?url=$uri&$args;
-
 		# Get file or folder or error
 		# try_files $uri $uri/ =404;
 	}
 
-	...
+	# Allow symlinks
+	# disable_symlinks off;
+
+	# File upload size
+    # client_max_body_size 100M;
+
+	# Tls redirect
+    # return 301 https://$host$request_uri;
+    # return 301 https://spa.xx$request_uri;
 }
+```
+
+### Run from browser
+```sh
+http://spa.xx
 ```
 
 ### Apache2 .htaccess
 ```bash
 RewriteEngine on
 # RewriteBase /
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 # Rewrite to index.html
 RewriteRule ^(.*)$ /index.html [NC,L,QSA]
 # Rewrite to index.php
 # RewriteRule ^(.*)$ /index.php?uri=$1 [NC,L,QSA]
-
 DirectoryIndex index.html
 ```
