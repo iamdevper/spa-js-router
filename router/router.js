@@ -66,7 +66,6 @@ export default class Router
 		});
 	}
 
-	// History state
 	static addOnState()
 	{
 		window.onpopstate = function(event) {
@@ -77,7 +76,6 @@ export default class Router
 		}
 	}
 
-	// Pages links
 	static addOnLoad()
 	{
 		// window.onload = function(){ /* ... */ }
@@ -85,10 +83,16 @@ export default class Router
 		window.addEventListener('DOMContentLoaded', Router.addLinks(), false);
 	}
 
-	static addLinks(e = null)
+	/**
+	 * Prevent a tag default event, add popstate to links
+	 * Add this to dynamic content links
+	 * Sample: Router.addLinks(".link")
+	 *
+	 * @param id Link class, id or tag name
+	 */
+	static addLinks(id = "a")
 	{
-		// History popstate for a href urls
-		var List = document.querySelectorAll("a")
+		var List = document.querySelectorAll(id)
 		List.forEach(function(item) {
 			var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
 			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
@@ -102,6 +106,11 @@ export default class Router
 		})
 	}
 
+	/**
+	 * Add onclick popstate event to links
+	 *
+	 * @param item A tag element
+	 */
 	static addClickEvent(item)
 	{
 		item.addEventListener('click', function(e) {
@@ -115,7 +124,6 @@ export default class Router
 		}, true)
 	}
 
-	// Load page component
 	static async importComponent(div, file, routes = [])
 	{
 		for(let item of routes)
@@ -130,7 +138,6 @@ export default class Router
 
 		if(ShowError)
 		{
-			// Error page
 			console.log("Show error:", ShowError);
 			await this.loadPage(AppDiv, AppErrorPage);
 		}
@@ -138,7 +145,6 @@ export default class Router
 		Router.addOnLoad();
 	}
 
-	// Check route, uri
 	static testSlug(route, uri)
 	{
 		if(uri === route) {
