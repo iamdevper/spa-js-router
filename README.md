@@ -1,5 +1,5 @@
-# SimpleSPA Javascript Router
-JavaScript SPA Router class.
+# SimpleSPA - Single Page Application javascript router class
+How to implement your own SPA routing system in javascript.
 
 ### Router
 main.js
