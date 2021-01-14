@@ -4,4 +4,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.html [NC,L,QSA]
 # RewriteRule ^(.*)$ /index.php?uri=$1 [NC,L,QSA]
 
-DirectoryIndex index.html index.php
+DirectoryIndex index.html
