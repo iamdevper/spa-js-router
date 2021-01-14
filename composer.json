@@ -1,0 +1,31 @@
+{
+	"name": "moovspace/spa-js-router",
+	"description": "SimpleSPA - SPA javascript application router.",
+	"type": "project",
+	"license": "MIT",
+	"require": {
+	},
+    "require-dev": {
+    },
+	"autoload": {
+        "psr-4": {
+            "App\\": "src/"
+		},
+		"classmap": [
+            "src/"
+        ]
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"scripts": {
+        "post-root-package-install": [
+			"@php -r \"echo phpversion();\""
+        ]
+	},
+	"authors": [
+        {
+            "name": "Marcin",
+            "email": "moovspace@gmail.com"
+        }
+    ]
+}
