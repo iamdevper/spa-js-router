@@ -6,8 +6,8 @@ How to implement your own SPA routing system in javascript.
 # cache clear
 composer clearcache
 
-# create new project in dir v3.0
-composer create-project --no-dev moovspace/spa-js-router=3.0 /var/www/html/spa.xx
+# create new project in dir v4.0
+composer create-project --no-dev moovspace/spa-js-router=4.0 /var/www/html/spa.xx
 
 # permissions
 chown -R your-user-name:www-data /var/www/html/spa.xx
