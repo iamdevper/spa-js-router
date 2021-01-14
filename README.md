@@ -1,19 +1,6 @@
 # SimpleSPA - JavaScript SPA application router
 How to implement your own SPA routing system in javascript.
 
-### Install with composer
-```sh
-# cache clear
-composer clearcache
-
-# create new project in dir v4.0
-composer create-project --no-dev moovspace/spa-js-router=4.0 /var/www/html/spa.xx
-
-# permissions
-chown -R your-user-name:www-data /var/www/html/spa.xx
-chmod -R 2775 /var/www/html/spa.xx
-```
-
 ### Router
 main.js
 ```js
@@ -87,11 +74,24 @@ export class Page extends Component
 }
 ```
 
-### Install js spa
+### Install SimpleSPA with git
 ```sh
 # Get with git
 git clone https://github.com/moovspace/spa-js-router.git /var/www/html/spa.xx
 # Permissions
+chown -R your-user-name:www-data /var/www/html/spa.xx
+chmod -R 2775 /var/www/html/spa.xx
+```
+
+### Install SimpleSPA with composer
+```sh
+# cache clear
+composer clearcache
+
+# create new project in dir v4.0
+composer create-project --no-dev moovspace/spa-js-router=4.0 /var/www/html/spa.xx
+
+# permissions
 chown -R your-user-name:www-data /var/www/html/spa.xx
 chmod -R 2775 /var/www/html/spa.xx
 ```
