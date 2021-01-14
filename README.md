@@ -1,4 +1,4 @@
-# SimpleSPA - Single Page Application javascript router class
+# SimpleSPA - Js SPA application router
 How to implement your own SPA routing system in javascript.
 
 ### Install with composer
