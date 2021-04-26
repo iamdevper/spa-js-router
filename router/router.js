@@ -126,12 +126,14 @@ export default class Router extends Singleton
 	 */
 	addClickEvent(item)
 	{
+		let it = this;
+
 		item.addEventListener('click', function(e) {
 			e.preventDefault()
 			window.history.pushState({page: item.href}, "Title "+item.href, item.href)
 			var popStateEvent = new PopStateEvent('popstate', { state: history.state })
 			dispatchEvent(popStateEvent)
-			if(this.ShowLog) {
+			if(it.ShowLog) {
 				console.log('Link history state:', history.state)
 			}
 		}, true)
