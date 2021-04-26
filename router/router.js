@@ -23,16 +23,6 @@ export default class Router extends Singleton
 		this.Routes.push({ route, file });
 	}
 
-	addOnState()
-	{
-		window.onpopstate = function(event) {
-			if(ShowLog) {
-				console.log("OnPopState Hash: " + document.location.hash, " Component: " + document.location.pathname, "State: " + JSON.stringify(event.state))
-			}
-			this.importComponent(this.AppDiv, this.AppMainPage, this.Routes)
-		}
-	}
-
 	init()
 	{
 		console.log("Init ...");
