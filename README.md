@@ -6,21 +6,18 @@ main.js
 ```js
 import Router from '/router/router.js'
 
-// Show logs
-let log = true;
-
 // Start router
-let r = new Router("#app", log);
+let r = new Router()
 
 // Add routes
-r.addRoute("/", "/components/home.js");
-r.addRoute("/page1", "/components/page1.js");
-r.addRoute("/page2", "/components/page2.js");
-r.addRoute("/page/{id}", "/components/page3.js");
-r.addRoute("/post/{id}/image/{name}", "/components/page3.js");
+r.addRoute("/", "/components/home.js")
+r.addRoute("/page1", "/components/page1.js")
+r.addRoute("/page2", "/components/page2.js")
+r.addRoute("/page/{id}", "/components/page3.js")
+r.addRoute("/post/{id}/image/{name}", "/components/page3.js")
 
 // Load external links redirects
-r.init();
+r.init()
 ```
 
 ### Add router

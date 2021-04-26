@@ -2,7 +2,7 @@ import Component from '/router/component.js'
 
 export class Page extends Component
 {
-	Setup(div, data)
+	Setup(div)
 	{
 		document.title = 'Error 404';
 
