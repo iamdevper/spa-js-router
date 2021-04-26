@@ -139,9 +139,11 @@ export default class Router extends Singleton
 
 	async loadPage(div, file)
 	{
+		let it = this;
+
 		await import(file).then(module => {
 			let obj = new module.Page().Setup(div);
-			if(this.ShowLog) {
+			if(it.ShowLog) {
 				console.log("Page loaded!", obj);
 			}
 			let m = document.querySelector(div)
@@ -158,7 +160,7 @@ export default class Router extends Singleton
 					Event.runOnLoad(i.cb, i.type);
 				});
 			}
-			this.ShowError = false
+			it.ShowError = false
 		})
 		.catch(err => {
 			console.log("Page import error: ", err);
