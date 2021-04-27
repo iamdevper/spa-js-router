@@ -2,36 +2,24 @@ export default class Component
 {
 	addScript(url)
 	{
-		var h = document.createElement('script')
-		h.setAttribute("type","text/javascript")
-		h.setAttribute("src", url)
-		if (typeof h != "undefined"){
-			document.getElementsByTagName("head")[0].appendChild(h)
-		}
-	}
-
-	fetchGet(url) {
-		return new Promise((resolve, reject) => {
-			const xhr = new XMLHttpRequest();
-			xhr.open("GET", url);
-			xhr.onload = () => resolve(xhr.responseText);
-			xhr.onerror = () => reject(xhr.statusText);
-			xhr.send();
-		})
+		let s = document.createElement('script')
+		s.setAttribute("type","text/javascript")
+		s.setAttribute("src", url)
+		if (typeof s != "undefined") { document.head.appendChild(s) }
 	}
 
 	queryParam(id){
-		const urlParams = new URLSearchParams(window.location.search);
-		return urlParams.get(id);
+		const urlParams = new URLSearchParams(window.location.search)
+		return urlParams.get(id)
 	}
 
 	urlParams(){
 		return window.location.pathname.split('/').filter(function (el) {
-			return el != null;
+			return el != null
 		});
 	}
 
 	Setup(){
-		return 'Override this';
+		return 'Override this'
 	}
 }

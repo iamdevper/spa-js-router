@@ -3,17 +3,17 @@ export default class Singleton
 	constructor(cnf = null)
 	{
 		if (!Singleton._instance) {
-			Singleton._instance = this;
+			Singleton._instance = this
 		}
 
-		this.cnf = cnf;
+		this.cnf = cnf
 
-		return Singleton._instance;
+		return Singleton._instance
 	}
 
 	static getInstance()
 	{
-		return this._instance;
+		return this._instance
 	}
 }
 
