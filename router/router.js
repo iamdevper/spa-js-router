@@ -49,6 +49,8 @@ export default class Router extends Singleton
 
 	async importComponent(div, file, routes = [])
 	{
+		this.ShowError = true;
+
 		for(let item of routes)
 		{
 			if(this.testSlug(item.route, location.pathname))
@@ -63,7 +65,7 @@ export default class Router extends Singleton
 
 		if(this.ShowError)
 		{
-			console.log("Show error:", this.ShowError)
+			console.log("Show error page:", this.AppErrorPage)
 			await this.loadPage(this.AppDiv, this.AppErrorPage)
 		}
 
