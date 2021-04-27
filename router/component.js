@@ -14,7 +14,7 @@ export default class Component
 	}
 
 	urlParams(){
-		return window.location.pathname.split('/').filter(function (el) {
+		return window.location.pathname.substring(1).split('/').filter(function (el) {
 			return el != null
 		});
 	}

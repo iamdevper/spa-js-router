@@ -4,13 +4,14 @@ a:hover{background: #fff; color: #0099ff; box-shadow: 0px 0px 6px #0099ff23}
 h2,h1{font-size: 35px; color: #0099ff;}
 #app{margin: 0px auto; width: 90%; text-align: center;}
 #links{margin: 20px auto; width: 90%; text-align: center; display: flex; justify-content: center; align-items: center;}
-li{display: flex; border: 1px solid #0099ff; color: #0099ff; padding: 10px 20px; margin-bottom: 10px; border-radius: 5px;}
+li{display: flex; justify-content: center; align-items: center; border: 1px solid #0099ff; color: #0099ff; padding: 10px 20px; margin-bottom: 10px; border-radius: 5px;}
 li div{flex: 1; text-align: left}
 #boo-click{transition: all .3s; float: left; width: 100%; margin-top: 20px;}
 #boo-click:hover{color: #ff0062; cursor: pointer}
 .float-left{text-align: left; max-width: 50px;}
 .float-right{text-align: right}
-
+.alink {float: right; width: 150px; background: #fff; color: #0099ff; text-align: center }
+.alink:hover {color: #cc55cc; border-color: #cc55cc; box-shadow: 0px 0px 6px #cc55cc23}
 @media all and (max-width: 1024px) {
 	#links{display: block}
 	a{float: left; width: 100%;}

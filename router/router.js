@@ -44,7 +44,7 @@ export default class Router extends Singleton
 	{
 		// window.onload = function(){ /* ... */ }
 		// window.removeEventListener('DOMContentLoaded', () => {}, false)
-		window.addEventListener('DOMContentLoaded', this.addLinks(), false)
+		window.addEventListener('DOMContentLoaded', Router.addLinks(), false)
 	}
 
 	async importComponent(div, file, routes = [])
@@ -104,11 +104,11 @@ export default class Router extends Singleton
 	 *
 	 * @param id Link class, id or tag name
 	 */
-	addLinks(id = "a")
+	static addLinks(id = "a")
 	{
-		var List = document.querySelectorAll(id)
+		var list = document.querySelectorAll(id)
 		let it = this
-		List.forEach(function(item) {
+		list.forEach(function(item) {
 			var h = item.href.replace(location.protocol+'//'+location.host, "") // delete protocol//host
 			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
 				if(it.ShowLog) {
@@ -116,7 +116,7 @@ export default class Router extends Singleton
 				}
 				item.setAttribute('target', '_blank')
 			} else {
-				it.addClickEvent(item)
+				Router.addClickEvent(item)
 			}
 		})
 	}
@@ -126,7 +126,7 @@ export default class Router extends Singleton
 	 *
 	 * @param item A tag element
 	 */
-	addClickEvent(item)
+	static addClickEvent(item)
 	{
 		let it = this
 
