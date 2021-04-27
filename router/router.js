@@ -1,7 +1,6 @@
 import Event from '/router/event.js'
 import Singleton from '/router/singleton.js'
 
-
 export default class Router extends Singleton
 {
 	Routes = []
@@ -20,7 +19,7 @@ export default class Router extends Singleton
 
 	addRoute(route, file)
 	{
-		if(route === "") { route = "/"; }
+		if(route === "") { route = "/" }
 		this.Routes.push({ route, file })
 	}
 
