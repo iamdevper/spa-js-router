@@ -9,9 +9,16 @@ import Router from '/router/router.js'
 // Start router
 let r = new Router()
 
-// Default pages
-r.AppMainPage = '/components/home.js'
-r.AppErrorPage = "/components/error/error.js";
+// App html div id
+r.AppDiv = "#app"
+// Default page
+r.AppMainPage = "/components/home.js"
+// Error page
+r.AppErrorPage = "/components/error/error.js"
+// Show error page
+r.ShowError = true
+// Show console logs
+r.ShowLog = true
 
 // Add routes
 r.addRoute("/", "/components/home.js")

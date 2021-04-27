@@ -4,28 +4,29 @@ import Singleton from '/router/singleton.js'
 
 export default class Router extends Singleton
 {
-	Routes = [];
-	AppDiv = '#app';
-	AppMainPage = "";
-	AppErrorPage = "";
-	ShowError = true;
-	ShowLog = true;
+	Routes = []
+	AppDiv = '#app'
+	AppMainPage = ""
+	AppErrorPage = ""
+	ShowError = true
+	ShowRoute = true
+	ShowLog = false
 
 	constructor(cnf = null)
 	{
-		super(cnf);
-		this.addOnState();
+		super(cnf)
+		this.addOnState()
 	}
 
 	addRoute(route, file)
 	{
 		if(route === "") { route = "/"; }
-		this.Routes.push({ route, file });
+		this.Routes.push({ route, file })
 	}
 
 	init()
 	{
-		console.log("Init ...");
+		console.log("Init ...")
 		this.importComponent(this.AppDiv, this.AppMainPage, this.Routes)
 	}
 
@@ -43,8 +44,8 @@ export default class Router extends Singleton
 	addOnLoad()
 	{
 		// window.onload = function(){ /* ... */ }
-		// window.removeEventListener('DOMContentLoaded', () => {}, false);
-		window.addEventListener('DOMContentLoaded', this.addLinks(), false);
+		// window.removeEventListener('DOMContentLoaded', () => {}, false)
+		window.addEventListener('DOMContentLoaded', this.addLinks(), false)
 	}
 
 	async importComponent(div, file, routes = [])
@@ -53,31 +54,33 @@ export default class Router extends Singleton
 		{
 			if(this.testSlug(item.route, location.pathname))
 			{
-				console.log("Route: ", item.route, item.file, location.pathname, this.ShowError)
-				file = item.file;
-				await this.loadPage(div, file);
+				if(this.ShowRoute) {
+					console.log("Route: ", item.route, item.file, location.pathname)
+				}
+				file = item.file
+				await this.loadPage(div, file)
 			}
 		}
 
 		if(this.ShowError)
 		{
-			console.log("Show error:", this.ShowError);
-			await this.loadPage(this.AppDiv, this.AppErrorPage);
+			console.log("Show error:", this.ShowError)
+			await this.loadPage(this.AppDiv, this.AppErrorPage)
 		}
 
-		this.addOnLoad();
+		this.addOnLoad()
 	}
 
 	testSlug(route, uri)
 	{
 		if(uri === route) {
 			if(this.ShowLog) {
-				console.log("URL SLUG ", uri);
+				console.log("URL SLUG ", uri)
 			}
-			return true;
+			return true
 		} else {
-			let re = /{[a-z]+}/g;
-			let arr = route.match(re);
+			let re = /{[a-z]+}/g
+			let arr = route.match(re)
 			if(arr != null) {
 				for(let i of arr) {
 					// console.log("Param: ", i)
@@ -86,11 +89,11 @@ export default class Router extends Singleton
 			}
 
 			let reg = "^" + route + "/?$"
-			reg = new RegExp(reg,"g");
+			reg = new RegExp(reg,"g")
 			if(reg.test(uri)) {
-				return true;
+				return true
 			} else {
-				return false;
+				return false
 			}
 		}
 	}
@@ -105,16 +108,16 @@ export default class Router extends Singleton
 	addLinks(id = "a")
 	{
 		var List = document.querySelectorAll(id)
-		let it = this;
+		let it = this
 		List.forEach(function(item) {
-			var h = item.href.replace(location.protocol+'//'+location.host, ""); // delete protocol//host
+			var h = item.href.replace(location.protocol+'//'+location.host, "") // delete protocol//host
 			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
 				if(it.ShowLog) {
-					console.log("External link ", item.href);
+					console.log("External link ", item.href)
 				}
-				item.setAttribute('target', '_blank');
+				item.setAttribute('target', '_blank')
 			} else {
-				it.addClickEvent(item);
+				it.addClickEvent(item)
 			}
 		})
 	}
@@ -126,7 +129,7 @@ export default class Router extends Singleton
 	 */
 	addClickEvent(item)
 	{
-		let it = this;
+		let it = this
 
 		item.addEventListener('click', function(e) {
 			e.preventDefault()
@@ -141,12 +144,12 @@ export default class Router extends Singleton
 
 	async loadPage(div, file)
 	{
-		let it = this;
+		let it = this
 
 		await import(file).then(module => {
-			let obj = new module.Page().Setup(div);
+			let obj = new module.Page().Setup(div)
 			if(it.ShowLog) {
-				console.log("Page loaded!", obj);
+				console.log("Page loaded: ", obj)
 			}
 			let m = document.querySelector(div)
 			if(m) {
@@ -154,18 +157,18 @@ export default class Router extends Singleton
 			}
 			if(obj.document_events) {
 				obj.document_events.forEach((i) => {
-					Event.run(i.id, i.cb, i.type, i.prevent, i.stop); // Run events
+					Event.run(i.id, i.cb, i.type, i.prevent, i.stop) // Run events
 				});
 			}
 			if(obj.window_events) {
 				obj.window_events.forEach((i) => {
-					Event.runOnLoad(i.cb, i.type);
+					Event.runOnLoad(i.cb, i.type)
 				});
 			}
 			it.ShowError = false
 		})
 		.catch(err => {
-			console.log("Page import error: ", err);
+			console.log("Page import error: ", err)
 		});
 	}
 }
