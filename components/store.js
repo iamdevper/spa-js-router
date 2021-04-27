@@ -14,6 +14,7 @@ export default class Store
 				if(i.completed) { task = 'Open' }
 				// d.innerHTML = '<li><div class="float-left">'+i.id+'</div><div>'+i.title+'</div><div class="float-right">'+task+'</div></li>'
 				d.innerHTML = '<li><div class="float-left">'+i.id+'</div><div>'+i.title+'</div><div class="float-right"> <a href="/todo/'+i.id+'" data-id="'+i.id+'" class="alink"> '+task+' </a> </div></li>'
+				Router.addLinks(".alink")
 			}
 		})
 	}
