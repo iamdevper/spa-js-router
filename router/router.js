@@ -4,9 +4,9 @@ import Singleton from '/router/singleton.js'
 export default class Router extends Singleton
 {
 	Routes = []
-	AppDiv = '#app'
-	AppMainPage = ""
-	AppErrorPage = ""
+	AppDiv = "#app"
+	AppMainPage = "/components/home.js"
+	AppErrorPage = "/components/error/error.js"
 	ShowError = true
 	ShowRoute = true
 	ShowLog = false

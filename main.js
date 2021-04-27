@@ -3,9 +3,7 @@ import Router from '/router/router.js'
 // Router object
 var r = new Router()
 
-r.AppDiv = "#app"
-r.AppMainPage = "/components/home.js"
-r.AppErrorPage = "/components/error/error.js"
+// Show console logs
 r.ShowLog = true
 
 // Add routes
