@@ -78,4 +78,16 @@ export default class Store
 			console.log(s)
 		});
 	}
+
+	static Upload(formId = "form")
+	{
+		let ele = document.getElementById(formId)
+		new Req().Method('POST')
+		.Send('/upload.php', new FormData(ele))
+		.then((s) => {
+			// Do something with upload response
+			console.log(s)
+			alert(s)
+		});
+	}
 }

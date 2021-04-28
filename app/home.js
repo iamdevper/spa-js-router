@@ -1,6 +1,7 @@
 import Component from '/router/component.js'
 import Event from '/router/event.js'
 import View from '/app/view/home.js'
+import Store from './store.js';
 
 export class Page extends Component
 {
@@ -18,7 +19,13 @@ export class Page extends Component
 			console.log("Page onload event !!!")
 		}, 'load');
 
+		// Upload onchange file
+		let upload = Event.addDocument("#file", (item,index) => {
+			console.log("File changed! ", item, index)
+			Store.Upload("form")
+		}, "change");
+
 		// Page
-		return { 'html': View.Html(div), 'document_events': [e1,e2], 'window_events': [e3] }
+		return { 'html': View.Html(div), 'document_events': [e1,e2,upload], 'window_events': [e3] }
 	}
 }

@@ -120,7 +120,7 @@ server {
 	server_name spa.xx;
 	root /var/www/html/spa.xx;
 	index index.html
-
+	# Js
 	location / {
 		# Get file or folder or redirect uri to index.html
 		try_files $uri $uri/ /index.html;
@@ -130,6 +130,11 @@ server {
 		# Get file or folder or error
 		# try_files $uri $uri/ =404;
 	}
+	# Php
+	location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+    }
 
 	# Allow symlinks
 	# disable_symlinks off;

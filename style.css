@@ -12,6 +12,10 @@ li div{flex: 1; text-align: left}
 .float-right{text-align: right}
 .alink {float: right; width: auto; min-width: 150px; background: #fff; color: #0099ff; text-align: center }
 .alink:hover {color: #cc55cc; border-color: #cc55cc; box-shadow: 0px 0px 6px #cc55cc23}
+#form {
+	margin: 50px auto;
+	max-width: 360px;
+}
 #error404 {
 	margin-top: 150px;
 	font-size: 40px;

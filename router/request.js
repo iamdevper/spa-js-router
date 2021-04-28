@@ -89,10 +89,34 @@ class Credentials
 export { Request as default, Cors, Credentials };
 
 /*
-new Req().Method('GET')
-.Json().Cors()
-.SendJson('https://jsonplaceholder.typicode.com/users/3/posts')
-.then((s) => {
-	console.log(s)
-});
+function Get()
+{
+	new Req().Method('GET').Json().Cors()
+	.SendJson('https://jsonplaceholder.typicode.com/users/3/posts')
+	.then((s) => {
+		// Do something with response
+		console.log(s)
+	});
+}
+
+function Post(obj = { title: 'foo', body: 'bar', userId: 1 })
+{
+	new Req().Method('POST').Json().Cors()
+	.SendJson('https://jsonplaceholder.typicode.com/users/3/posts', obj)
+	.then((s) => {
+		// Do something with response
+		console.log(s)
+	});
+}
+
+function Upload(formId = "form")
+{
+	let ele = document.getElementById(formId)
+	new Req().Method('POST')
+	.Send('/upload.php', new FormData(ele))
+	.then((s) => {
+		// Do something with upload response
+		console.log(s)
+	});
+}
 */
