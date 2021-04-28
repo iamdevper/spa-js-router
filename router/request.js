@@ -1,35 +1,35 @@
 class Request
 {
-    method = 'GET'
-    cors = 'same-origin'
-    credentials = 'same-origin'
+	method = 'GET'
+	cors = 'same-origin'
+	credentials = 'same-origin'
 	headers = new Headers()
 	isJsonRequest = false
 
-    Method(str = 'GET')
-    {
-        this.method = str
-        return this
-    }
+	Method(str = 'GET')
+	{
+		this.method = str
+		return this
+	}
 
-    Cors(str = 'cors')
-    {
-        // (*) cors, no-cors, same-origin
-        this.cors = str
-        return this
-    }
+	Cors(str = 'cors')
+	{
+		// (*) cors, no-cors, same-origin
+		this.cors = str
+		return this
+	}
 
-    Credentials(str = 'same-origin')
-    {
-        // (*) same-origin, include, omit
-        this.credentials = str
-        return this
-    }
+	Credentials(str = 'same-origin')
+	{
+		// (*) same-origin, include, omit
+		this.credentials = str
+		return this
+	}
 
-    Headers(obj = {})
-    {
-        this.headers = obj
-        return this
+	Headers(obj = {})
+	{
+		this.headers = obj
+		return this
 	}
 
 	Header(name, value)
@@ -45,45 +45,45 @@ class Request
 		return this
 	}
 
-    async Send(url, formData)
-    {
-        let opt = {
-            method: this.method,
-            mode: this.cors,
-            credentials: this.credentials,
-            headers: this.headers
-        }
+	async Send(url, formData)
+	{
+		let opt = {
+			method: this.method,
+			mode: this.cors,
+			credentials: this.credentials,
+			headers: this.headers
+		}
 		opt.body = formData
 		return await (await fetch(url, opt)).text()
-    }
+	}
 
-    async SendJson(url, obj)
-    {
+	async SendJson(url, obj)
+	{
 		this.Json()
 
-        let opt = {
-            method: this.method,
-            mode: this.cors,
-            credentials: this.credentials,
-            headers: this.headers
-        }
+		let opt = {
+			method: this.method,
+			mode: this.cors,
+			credentials: this.credentials,
+			headers: this.headers
+		}
 		opt.body = JSON.stringify(obj)
-        return await (await fetch(url, opt)).json()
-    }
+		return await (await fetch(url, opt)).json()
+	}
 }
 
 class Cors
 {
-    static get Cors() { return 'cors' }
-    static get NoCors() { return 'no-cors' }
-    static get SameOrigin() { return 'same-origin' }
+	static get Cors() { return 'cors' }
+	static get NoCors() { return 'no-cors' }
+	static get SameOrigin() { return 'same-origin' }
 }
 
 class Credentials
 {
-    static get Include() { return 'include' }
-    static get Omit() { return 'omit' }
-    static get SameOrigin() { return 'same-origin' }
+	static get Include() { return 'include' }
+	static get Omit() { return 'omit' }
+	static get SameOrigin() { return 'same-origin' }
 }
 
 export { Request as default, Cors, Credentials };
