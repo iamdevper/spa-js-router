@@ -12,20 +12,19 @@ let r = new Router()
 // App html div id
 r.AppDiv = "#app"
 // Default page
-r.AppMainPage = "/components/home.js"
+r.AppMainPage = "/app/home.js"
 // Error page
-r.AppErrorPage = "/components/error/error.js"
+r.AppErrorPage = "/app/error/error.js"
 // Show error page
 r.ShowError = true
 // Show console logs
 r.ShowLog = true
 
 // Add routes
-r.addRoute("/", "/components/home.js")
-r.addRoute("/page1", "/components/page1.js")
-r.addRoute("/page2", "/components/page2.js")
-r.addRoute("/page/{id}", "/components/page3.js")
-r.addRoute("/post/{id}/image/{name}", "/components/page3.js")
+r.addRoute("/", "/app/home.js")
+r.addRoute("/todos/list", "/app/todo-list.js")
+r.addRoute("/todo/{id}", "/app/todo.js")
+r.addRoute("/profil/{id}", "/app/user.js")
 
 // Load external links redirects
 r.init()
@@ -46,12 +45,12 @@ index.html
 ```
 
 ### Page component class
-nano /components/home.js
+nano /app/home.js
 ```js
 import Component from '/router/component.js'
 import Event from '/router/event.js'
-import Store from '/components/store.js'
-import View from '/components/view/view.js'
+import Store from '/app/store.js'
+import View from '/app/view/home.js'
 
 export class Page extends Component
 {
@@ -66,18 +65,15 @@ export class Page extends Component
 			alert("Path clicked: " + event.target.dataset.id);
 		}, "click");
 
-		// Window events: hashchange, popstate, load
+		// Window events: hashchange, load, popstate - after local link click
 		let e3 = Event.addWindow((event) => {
-			Store.FetchAll(0,30);
-		}, 'popstate'); // popstate - after local link click
+			Store.FetchAll(0,10);
+		}, 'load');
 
 		// Page title
-		document.title = 'Page 2 - Load data';
+		document.title = 'Home page - ' + location.pathname;
 
-		// Html content from class
-		let html = View.HtmlLinks() + View.Html(location.pathname)
-
-		return { 'html': html, 'document_events': [e1,e2], 'window_events': [e3] }
+		return { 'html': View.Html(), 'document_events': [e1,e2], 'window_events': [e3] }
 	}
 }
 ```
