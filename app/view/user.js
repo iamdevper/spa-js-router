@@ -7,8 +7,8 @@ export default class UserView
 		return '<div id="content"></div>';
 	}
 
-    static Html(div)
-    {
+	static Html(div)
+	{
 		return Menu.Html() + this.Todo(div);
-    }
+	}
 }

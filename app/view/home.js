@@ -7,8 +7,8 @@ export default class HomeView
 		return '<div id="content"> Homepage content goes here (' + div + ').</div>';
 	}
 
-    static Html(div)
-    {
+	static Html(div)
+	{
 		return Menu.Html() + this.Home(div);
-    }
+	}
 }
