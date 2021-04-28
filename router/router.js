@@ -5,8 +5,8 @@ export default class Router extends Singleton
 {
 	Routes = []
 	AppDiv = "#app"
-	AppMainPage = "/components/home.js"
-	AppErrorPage = "/components/error/error.js"
+	AppMainPage = "/app/home.js"
+	AppErrorPage = "/app/error/error.js"
 	ShowError = true
 	ShowRoute = true
 	ShowLog = false
@@ -112,7 +112,7 @@ export default class Router extends Singleton
 		let it = this
 		list.forEach(function(item) {
 			var h = item.href.replace(location.protocol+'//'+location.host, "") // delete protocol//host
-			if(h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
+			if(h.indexOf("tel:") == 0 || h.indexOf("mailto:") == 0 || h.indexOf("http://") == 0 || h.indexOf("https://") == 0 || h.indexOf("//") == 0) {
 				if(it.ShowLog) {
 					console.log("External link ", item.href)
 				}
