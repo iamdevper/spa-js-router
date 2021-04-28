@@ -1,6 +1,6 @@
 import Menu from '/app/view/menu.js'
 
-export default class TodoView
+export default class UserView
 {
 	static Todo(div)
 	{
