@@ -132,9 +132,9 @@ server {
 	}
 	# Php
 	location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-    }
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
 
 	# Allow symlinks
 	# disable_symlinks off;
