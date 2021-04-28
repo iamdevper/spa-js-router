@@ -1,6 +1,8 @@
 import Router from '/router/router.js'
 
 var r = new Router()
+
+// Console logs
 // r.ShowLog = true
 
 r.addRoute("/", "/app/home.js")
