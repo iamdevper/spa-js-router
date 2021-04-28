@@ -1,4 +1,5 @@
 import Router from '/router/router.js'
+import Req from '/router/request.js'
 
 export default class Store
 {
@@ -56,5 +57,25 @@ export default class Store
 				}
 			}
 		})
+	}
+
+	static Posts()
+	{
+		new Req().Method('GET').Json().Cors()
+		.SendJson('https://jsonplaceholder.typicode.com/users/3/posts')
+		.then((s) => {
+			// Do something with response
+			console.log(s)
+		});
+	}
+
+	static AddPost(obj = { title: 'foo', body: 'bar', userId: 1 })
+	{
+		new Req().Method('POST').Json().Cors()
+		.SendJson('https://jsonplaceholder.typicode.com/users/3/posts', obj)
+		.then((s) => {
+			// Do something with response
+			console.log(s)
+		});
 	}
 }
