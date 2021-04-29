@@ -1,7 +1,7 @@
-import Component from '/router/component.js'
-import Event from '/router/event.js'
-import Store from '/app/store.js'
-import View from '/app/view/upload.js'
+import Component from '/spa/router/component.js'
+import Event from '/spa/router/event.js'
+import Store from '/spa/store.js'
+import View from '/spa/view/upload.js'
 
 export class Page extends Component
 {

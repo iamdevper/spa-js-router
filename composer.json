@@ -5,14 +5,12 @@
 	"license": "MIT",
 	"require": {
 	},
-	"require-dev": {
-	},
 	"autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/"
 		},
 		"classmap": [
-            "src/"
+            "app/"
         ]
 	},
 	"minimum-stability": "stable",
@@ -27,5 +25,7 @@
             "name": "Marcin",
             "email": "moovspace@gmail.com"
         }
-    ]
+	],
+	"require-dev": {
+	}
 }

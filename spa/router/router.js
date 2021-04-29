@@ -1,12 +1,12 @@
-import Event from '/router/event.js'
-import Singleton from '/router/singleton.js'
+import Event from '/spa/router/event.js'
+import Singleton from '/spa/router/singleton.js'
 
 export default class Router extends Singleton
 {
 	Routes = []
 	AppDiv = "#app"
-	AppMainPage = "/app/home.js"
-	AppErrorPage = "/app/error/error.js"
+	AppMainPage = "/spa/home.js"
+	AppErrorPage = "/spa/error/error.js"
 	ShowError = true
 	ShowRoute = true
 	ShowLog = false

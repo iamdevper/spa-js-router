@@ -1,5 +1,5 @@
-import Router from '/router/router.js'
-import Req from '/router/request.js'
+import Router from '/spa/router/router.js'
+import Req from '/spa/router/request.js'
 
 export default class Store
 {

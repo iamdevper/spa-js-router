@@ -1,4 +1,4 @@
-import Menu from '/app/view/menu.js'
+import Menu from '/spa/view/menu.js'
 
 export default class UploadView
 {

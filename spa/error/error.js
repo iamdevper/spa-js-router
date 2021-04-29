@@ -1,4 +1,4 @@
-import Component from '/router/component.js'
+import Component from '/spa/router/component.js'
 
 export class Page extends Component
 {

@@ -1,7 +1,7 @@
-import Component from '/router/component.js'
-import Event from '/router/event.js'
-import Store from '/app/store.js'
-import View from '/app/view/todo.js'
+import Component from '/spa/router/component.js'
+import Event from '/spa/router/event.js'
+import Store from '/spa/store.js'
+import View from '/spa/view/todo.js'
 
 export class Page extends Component
 {
@@ -12,7 +12,7 @@ export class Page extends Component
 		// Pretty url /todo/{id}
 		let id = this.urlParams()[1]
 
-		Store.FetchId(id);
+		Store.FetchAll(0,20);
 
 		console.log("Todo id: ", id)
 

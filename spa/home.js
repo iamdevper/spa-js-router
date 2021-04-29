@@ -1,6 +1,6 @@
-import Component from '/router/component.js'
-import Event from '/router/event.js'
-import View from '/app/view/home.js'
+import Component from '/spa/router/component.js'
+import Event from '/spa/router/event.js'
+import View from '/spa/view/home.js'
 import Store from './store.js';
 
 export class Page extends Component
