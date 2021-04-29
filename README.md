@@ -1,4 +1,4 @@
-# Js SPA router application
+# Js SPA app router
 Single page application routing system in javascript.
 
 ### Router
