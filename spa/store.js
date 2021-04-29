@@ -83,7 +83,7 @@ export default class Store
 	{
 		let ele = document.getElementById(formId)
 		new Req().Method('POST')
-		.Send('/upload.php', new FormData(ele))
+		.Send('/app/upload.php', new FormData(ele))
 		.then((s) => {
 			// Do something with upload response
 			console.log(s)
