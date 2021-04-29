@@ -4,7 +4,7 @@ Single page application routing system in javascript.
 ### Router
 main.js
 ```js
-import Router from '/router/router.js'
+import Router from '/spa/router/router.js'
 
 // Start router
 let r = new Router()
@@ -12,19 +12,19 @@ let r = new Router()
 // App html div id
 r.AppDiv = "#app"
 // Default page
-r.AppMainPage = "/app/home.js"
+r.AppMainPage = "/spa/home.js"
 // Error page
-r.AppErrorPage = "/app/error/error.js"
+r.AppErrorPage = "/spa/error/error.js"
 // Show error page
 r.ShowError = true
 // Show console logs
 r.ShowLog = true
 
 // Add routes
-r.addRoute("/", "/app/home.js")
-r.addRoute("/todos/list", "/app/todo-list.js")
-r.addRoute("/todo/{id}", "/app/todo.js")
-r.addRoute("/profil/{id}", "/app/user.js")
+r.addRoute("/", "/spa/home.js")
+r.addRoute("/todos/list", "/spa/todo-list.js")
+r.addRoute("/todo/{id}", "/spa/todo.js")
+r.addRoute("/profil/{id}", "/spa/user.js")
 
 // Load external links redirects
 r.init()
@@ -39,18 +39,18 @@ index.html
 <body id="body">
 	<div id="app">
 		<h2> Loading ... </h2>
-		<h4> <img src="/loader.gif"> </h4>
+		<h4> <img src="/media/loader.gif"> </h4>
 	</div>
 </body>
 ```
 
 ### Page component class
-nano /app/home.js
+nano /spa/home.js
 ```js
-import Component from '/router/component.js'
-import Event from '/router/event.js'
-import Store from '/app/store.js'
-import View from '/app/view/home.js'
+import Component from '/spa/router/component.js'
+import Event from '/spa/router/event.js'
+import Store from '/spa/store.js'
+import View from '/spa/view/home.js'
 
 export class Page extends Component
 {
