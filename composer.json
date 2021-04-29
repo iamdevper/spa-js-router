@@ -1,6 +1,6 @@
 {
 	"name": "moovspace/spa-js-router",
-	"description": "SimpleSPA - SPA javascript application router.",
+	"description": "Js SPA application router.",
 	"type": "project",
 	"license": "MIT",
 	"require": {
